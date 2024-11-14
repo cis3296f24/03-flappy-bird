@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5b45b616-1c01-40f6-b838-de9f2eddfd06" name="Changes" comment="Bird only">
-      <change beforePath="$PROJECT_DIR$/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/GamePanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/GamePanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/GamePanel.class" afterDir="false" />
-    </list>
+    <list default="true" id="5b45b616-1c01-40f6-b838-de9f2eddfd06" name="Changes" comment="Bird only" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,9 +31,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.FlappyBird.executor": "Run",
     "Application.FlappyMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Shafiq-Branch-BirdOnly",
+    "git-widget-placeholder": "ElisBranch",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -71,6 +69,8 @@
       <workItem from="1731524799168" duration="4502000" />
       <workItem from="1731550450165" duration="77000" />
       <workItem from="1731550568603" duration="2896000" />
+      <workItem from="1731556103821" duration="230000" />
+      <workItem from="1731556367938" duration="370000" />
     </task>
     <task id="LOCAL-00001" summary="Bird only">
       <option name="closed" value="true" />
