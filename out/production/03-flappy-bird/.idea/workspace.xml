@@ -34,7 +34,7 @@
     "Application.FlappyBird.executor": "Run",
     "Application.FlappyMain.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "ElisBranch",
+    "git-widget-placeholder": "Shafiq-Branch-Bird-single-dim-array-working",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
@@ -71,6 +71,8 @@
       <workItem from="1731550568603" duration="2896000" />
       <workItem from="1731556103821" duration="230000" />
       <workItem from="1731556367938" duration="370000" />
+      <workItem from="1731556799564" duration="84000" />
+      <workItem from="1731556925377" duration="98000" />
     </task>
     <task id="LOCAL-00001" summary="Bird only">
       <option name="closed" value="true" />
