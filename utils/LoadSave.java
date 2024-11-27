@@ -28,8 +28,7 @@ public class LoadSave {
 
     // public static final String PLAYER_ATLAS = "eagle_Linear_Sheet_Fixed.png";
     public static final String PLAYER_EAGLE = "eagle_Linear_Sheet_Fixed.png";
-    //  public static final String PLAYER_PIRATE = "player_sprites.png";
-    // public static final String PLAYER_PIRATE = PLAYER_ATLAS;
+    public static final String PLAYER_PIRATE = "player_sprites.png";
     public static final String PLAYER_ORC = "player_orc.png";
     public static final String PLAYER_SOLDIER = "player_soldier.png";
     // public static final String LEVEL_ATLAS = "outside_sprites.png";

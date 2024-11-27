@@ -113,7 +113,7 @@ public class Player extends Entity {
 
     private void loadBirdAnimations() {
 
-        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_EAGLE);
         //               BufferedImage[i Row][j columns]
         animations = new BufferedImage[4][11];
         // System.out.println("BufferedImage[] []" + animations.length);

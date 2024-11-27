@@ -7,6 +7,7 @@
     <list default="true" id="37726c22-96e1-43c0-a0f6-dbde95f7fe71" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/entities/PlayerCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/entities/PlayerCharacter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/PlayerSelection.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/PlayerSelection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/LoadSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/LoadSave.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +64,7 @@
       <updated>1732691470724</updated>
       <workItem from="1732691472453" duration="57000" />
       <workItem from="1732691559080" duration="12000" />
-      <workItem from="1732692141810" duration="2179000" />
+      <workItem from="1732692141810" duration="3062000" />
     </task>
     <servers />
   </component>
