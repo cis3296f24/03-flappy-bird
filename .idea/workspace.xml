@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5b45b616-1c01-40f6-b838-de9f2eddfd06" name="Changes" comment="Bird only">
+      <change afterPath="$PROJECT_DIR$/audio/AudioPlayer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/effects/DialogueEffect.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/effects/Rain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/entities/PlayerCharacter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gamestates/Credits.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gamestates/GameOptions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gamestates/PlayerSelection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/objects/GameObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/objects/ObjectManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entities/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/entities/Entity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entities/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/entities/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/Gamestate.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/Gamestate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/Playing.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/Playing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gamestates/Statemethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/Statemethods.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/Level.java" beforeDir="false" afterPath="$PROJECT_DIR$/levels/Level.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/levels/LevelManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/levels/LevelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/FlappyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/FlappyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/Bird.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/CenterSpriteTool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/FlappyBird$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/FlappyBird.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/LevelCreateTool.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/Print2DArray.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ScrollingForeground.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/SpaceBarReleaseExample$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/SpaceBarReleaseExample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/entities/Entity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/entities/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Gamestate.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Playing.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/State.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Statemethods.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/inputs/KeyboardInputs$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/inputs/KeyboardInputs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/inputs/MouseInputs$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/inputs/MouseInputs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/levels/Level.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/levels/LevelManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/FlappyGame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/FlappyGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/FlappyMain.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/GamePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/GameWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/main/GameWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/GameOverOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/MenuButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/PauseButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/PauseOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/SoundButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/UrmButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/ui/VolumeButton.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$Directions.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$Directions.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$FlappyWorldConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$FlappyWorldConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$PlayerConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$PlayerConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$Buttons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$Buttons.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$PauseButtons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$PauseButtons.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$URMButtons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$URMButtons.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$VolumeButtons.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI$VolumeButtons.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants$UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/LoadSave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/LoadSave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/GameOverOverlay.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/GameOverOverlay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/MenuButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/MenuButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/VolumeButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/VolumeButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/LoadSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/LoadSave.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2onvLHBo2yJpx81X5vY74bHo0gQ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CenterSpriteTool.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FlappyBird.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FlappyMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GenerateAlignedRedBarsImage.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GenerateRedBarsImage.executor&quot;: &quot;Run&quot;,
+    &quot;Application.LevelCreateTool.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Print2DArray.executor&quot;: &quot;Run&quot;,
+    &quot;Application.RedBarsImage.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ScrollingForeground.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SpaceBarReleaseExample.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SpriteAnimation.executor&quot;: &quot;Run&quot;,
+    &quot;Application.SpriteAnimation1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;appmap.toolWindow.documentation.collapsed&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Shafiq-Branch-2DArrayAnim&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.31954023&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\S\OneDrive - Temple University\Documents\GitHub\03-flappy-bird\effects" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.21565.193" />
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-IU-243.21565.193" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5b45b616-1c01-40f6-b838-de9f2eddfd06" name="Changes" comment="" />
+      <created>1731518099633</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731518099633</updated>
+      <workItem from="1731518101462" duration="4217000" />
+      <workItem from="1731524799168" duration="4502000" />
+      <workItem from="1731550450165" duration="77000" />
+      <workItem from="1731550568603" duration="2896000" />
+      <workItem from="1731556103821" duration="230000" />
+      <workItem from="1731556367938" duration="370000" />
+      <workItem from="1731556799564" duration="84000" />
+      <workItem from="1731556925377" duration="161000" />
+      <workItem from="1731557172024" duration="1415000" />
+      <workItem from="1731559573523" duration="15568000" />
+      <workItem from="1731611538580" duration="9918000" />
+      <workItem from="1731642439060" duration="13239000" />
+      <workItem from="1731686620100" duration="244000" />
+      <workItem from="1731696276188" duration="1092000" />
+      <workItem from="1731780603574" duration="2789000" />
+      <workItem from="1731789824317" duration="818000" />
+      <workItem from="1731790691431" duration="4704000" />
+      <workItem from="1731990548614" duration="79000" />
+      <workItem from="1732007955756" duration="2000" />
+      <workItem from="1732055530965" duration="855000" />
+      <workItem from="1732067551503" duration="2245000" />
+      <workItem from="1732071640315" duration="4000" />
+      <workItem from="1732080809896" duration="13874000" />
+      <workItem from="1732130043452" duration="309000" />
+      <workItem from="1732132019437" duration="19263000" />
+      <workItem from="1732171204129" duration="2804000" />
+      <workItem from="1732174428231" duration="1656000" />
+      <workItem from="1732176261814" duration="1764000" />
+      <workItem from="1732178306920" duration="1054000" />
+      <workItem from="1732179739371" duration="1544000" />
+      <workItem from="1732181422454" duration="8943000" />
+      <workItem from="1732220774741" duration="4948000" />
+      <workItem from="1732231399801" duration="628000" />
+      <workItem from="1732276727742" duration="8474000" />
+      <workItem from="1732287161259" duration="143000" />
+      <workItem from="1732287312289" duration="4702000" />
+      <workItem from="1732300070813" duration="4000" />
+      <workItem from="1732301103224" duration="10595000" />
+      <workItem from="1732311803847" duration="4011000" />
+      <workItem from="1732316851363" duration="5450000" />
+      <workItem from="1732324194091" duration="8512000" />
+      <workItem from="1732386600459" duration="10303000" />
+      <workItem from="1732413238533" duration="2307000" />
+      <workItem from="1732494384954" duration="21062000" />
+      <workItem from="1732516568417" duration="2000" />
+      <workItem from="1732520295150" duration="21000" />
+      <workItem from="1732555199354" duration="45570000" />
+      <workItem from="1732610014765" duration="1000" />
+      <workItem from="1732657413773" duration="7462000" />
+      <workItem from="1732671130947" duration="2007000" />
+      <workItem from="1732673165977" duration="9454000" />
+      <workItem from="1732683196259" duration="4780000" />
+    </task>
+    <task id="LOCAL-00001" summary="Bird only">
+      <option name="closed" value="true" />
+      <created>1731526058558</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731526058558</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Bird only" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bird only" />
+  </component>
+</project>
