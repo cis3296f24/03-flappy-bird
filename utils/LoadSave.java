@@ -80,8 +80,8 @@ public class LoadSave {
     // Start adding backgrounds in this class.
     // See Playing.java
 
-    public static final String FlappyCity_BG_IMG = "scene_chatGPT.png";  // This is the background created by CHAT_GPT.
-    public static final String GROUND_IMG = "seamless_ground.png";  // This is the background created by CHAT_GPT.
+    // public static final String FlappyCity_BG_IMG = "scene_chatGPT.png";  // This is the background created by CHAT_GPT.
+    //  public static final String GROUND_IMG = "seamless_ground.png";  // This is the background created by CHAT_GPT.
     // Halloween theme backgrounds
     public static final String Folder = "HalloweenThemes/";
     public static final String FlappyLayer_1 = Folder + "Layer_1.png";  // This is the background downloaded from free sites.
