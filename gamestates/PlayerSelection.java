@@ -39,7 +39,7 @@ public class PlayerSelection extends State implements Statemethods {
         characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.EAGLE);
         characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.PIRATE);
         characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.ORC);
-        characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.SOLDIER);
+        // characterAnimations[i++] = new CharacterAnimation(PlayerCharacter.SOLDIER);
 
     }
 
@@ -163,6 +163,8 @@ public class PlayerSelection extends State implements Statemethods {
         }
 
         public void draw(Graphics g, int drawX, int drawY) {
+            System.out.println("Drawing character animations  " + drawX + " " + drawY + "  IDLE, aniIndex  " + IDLE + " " + aniIndex);
+            System.out.println("animations   " + animations.length);
             g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],
                     drawX - pc.spriteW * scale / 2,
                     drawY - pc.spriteH * scale / 2,
