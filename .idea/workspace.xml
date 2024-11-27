@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="37726c22-96e1-43c0-a0f6-dbde95f7fe71" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03-flappy-bird.iml" beforeDir="false" afterPath="$PROJECT_DIR$/03-flappy-bird.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gamestates/Playing.java" beforeDir="false" afterPath="$PROJECT_DIR$/gamestates/Playing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/03-flappy-bird.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/03-flappy-bird.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Playing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/gamestates/Playing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/LoadSave.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/03-flappy-bird/utils/LoadSave.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entities/PlayerCharacter.java" beforeDir="false" afterPath="$PROJECT_DIR$/entities/PlayerCharacter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/LoadSave.java" beforeDir="false" afterPath="$PROJECT_DIR$/utils/LoadSave.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +63,7 @@
       <updated>1732691470724</updated>
       <workItem from="1732691472453" duration="57000" />
       <workItem from="1732691559080" duration="12000" />
-      <workItem from="1732692141810" duration="573000" />
+      <workItem from="1732692141810" duration="2179000" />
     </task>
     <servers />
   </component>
