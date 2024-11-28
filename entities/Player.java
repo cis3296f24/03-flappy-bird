@@ -275,9 +275,10 @@ public class Player extends Entity {
 
     }
 
+    // Score incremented here
     private void updateXPos(float xSpeed) {
         if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
-            System.out.println("hit x: " + hitbox.x + ", y: " + hitbox.y);
+            // System.out.println("hit x: " + hitbox.x + ", y: " + hitbox.y);
             updateBirdScore(hitbox.x,hitbox.y,lvlData);
             hitbox.x += xSpeed;
         } else {

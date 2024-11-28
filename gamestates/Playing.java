@@ -28,16 +28,17 @@ public class Playing extends State implements Statemethods {
     private boolean paused = false;
 
     private int xLvlOffset;
-    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
-    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
-    private int xLvlOffsetX;
+    // private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
+    // private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
+    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
+    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
+    private int maxLvlOffsetX;
 
     private LevelCompletedOverlay levelCompletedOverlay;
 
 //    private int lvlTilesWide = GetLevelData()[0].length;
 //    private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
 //    private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
-    private int maxLvlOffsetX;
 
     private BufferedImage backgroundImg, flappyGroundImg;
     private BufferedImage flappyBKGLayer1, flappyBKGLayer2, flappyBKGLayer3;
@@ -112,28 +113,45 @@ public class Playing extends State implements Statemethods {
         }
     }
 
-    private void checkCloseToBorder() {
+//    private void checkCloseToBorder() {
+//
+//        // System.out.println("xLvlOffset: " + xLvlOffset);
+//
+//        int playerX = (int) player.getHitbox().x;
+//        int diff = playerX - xLvlOffset;
+//
+//        System.out.println("xLvlOffset: " + xLvlOffset + " playerX +  diff: " + diff);
+//
+//        if (diff > rightBorder)
+//            xLvlOffset += diff - rightBorder;
+//        else if (diff < leftBorder)
+//            xLvlOffset += diff - leftBorder; // <--------------------------------- center bird
+//
+//        if (xLvlOffset > maxLvlOffsetX)
+//            xLvlOffset = maxLvlOffsetX;
+//        else if (xLvlOffset < 0)
+//            xLvlOffset = 0;
+//    }
 
+
+    private void checkCloseToBorder() {
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
-
-        // Important score keeping constans are here. We can use these to measure score.
-        // System.out.println("Player getHitbox().x = " + player.getHitbox().x);
-//        System.out.println("rightBorder = " + rightBorder);
-//        System.out.println("xLvlOffset = " + xLvlOffset / 3);
-//        System.out.println("maxLvlOffsetX " + maxLvlOffsetX);
-//        System.out.println("diff  " + diff);
-
+        System.out.println("xLvlOffset: " + xLvlOffset + " playerX +  diff: " + diff);
+        System.out.println("rightBorder " + rightBorder);
+        System.out.println("leftBorder " + leftBorder);
         if (diff > rightBorder)
             xLvlOffset += diff - rightBorder;
         else if (diff < leftBorder)
-            xLvlOffset += diff - leftBorder; // <--------------------------------- center bird
+            xLvlOffset += diff - leftBorder;
 
         if (xLvlOffset > maxLvlOffsetX)
             xLvlOffset = maxLvlOffsetX;
         else if (xLvlOffset < 0)
             xLvlOffset = 0;
     }
+
+
 
     // Please see LoadSave.java to input or load your images.
     // Everytime we draw something for Flappy Bird we need to add it here.
@@ -153,7 +171,9 @@ public class Playing extends State implements Statemethods {
 //            g.drawImage(backgroundImg, (int) backgroundImgMoved + bgLoopPoint, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
 //        }
 
-        backgroundImgCounter += 1;
+        // backgroundImgCounter += 1;
+        // System.out.println("backgroundImgCounter: " + backgroundImgCounter);
+        // System.out.println("xLvlOffset: " + xLvlOffset);
         backgroundImgL1Speed = -xLvlOffset * backLayer1Speed;
         backgroundImgL2Speed = -xLvlOffset * backLayer2Speed;
         // System.out.println("xLvlOffset: " + xLvlOffset / 3);
