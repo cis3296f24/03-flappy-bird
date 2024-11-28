@@ -77,7 +77,7 @@ public class Menu extends State implements Statemethods {
                 if (mb.isMousePressed())
                     mb.applyGamestate();
                 if (mb.getState() == Gamestate.PLAYING)
-                    FlappyGame.getAudioPlayer().setLevelSong(FlappyGame.getPlaying().getLevelManager().getLevelIndex());
+                    FlappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
                 break;
             }
         }
@@ -104,8 +104,8 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            Gamestate.state = Gamestate.PLAYING;
+//        if (e.getKeyCode() == KeyEvent.VK_ENTER)
+//            Gamestate.state = Gamestate.PLAYING;
 
     }
 
