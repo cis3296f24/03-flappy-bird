@@ -252,6 +252,10 @@ public class Playing extends State implements Statemethods {
 
     }
 
+    public LevelManager getLevelManager() {
+        return levelManager;
+    }
+
     public void unpauseGame() {
         paused = false;
     }

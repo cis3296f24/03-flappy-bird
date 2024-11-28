@@ -1,9 +1,15 @@
 package main;
 
 import java.awt.Graphics;
+
+import audio.AudioPlayer;
 import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
+import gamestates.GameOptions;
+
+import ui.AudioOptions;
+import utils.LoadSave;
 
 public class FlappyGame implements Runnable {
 
@@ -13,8 +19,12 @@ public class FlappyGame implements Runnable {
     private final int FPS_SET = 120;  // Frames per second
     private final int UPS_SET = 200;  // Updates per second
 
-    private Playing playing;
+    private static Playing playing;
     private Menu menu;
+    private GameOptions gameOptions;
+    private AudioOptions audioOptions;
+    private static AudioPlayer audioPlayer;
+
 
     public final static int TILES_DEFAULT_SIZE = 32;
     public final static float SCALE = 2.0f;
@@ -35,8 +45,11 @@ public class FlappyGame implements Runnable {
     }
 
     private void initClasses() {
+        audioOptions = new AudioOptions();
         menu = new Menu(this);
         playing = new Playing(this);
+        gameOptions = new GameOptions(this);
+        audioPlayer = new AudioPlayer();
     }
 
     private void startGameLoop() {
@@ -53,6 +66,8 @@ public class FlappyGame implements Runnable {
                 playing.update();
                 break;
             case OPTIONS:
+                gameOptions.update();
+                break;
             case QUIT:
             default:
                 System.exit(0);
@@ -124,11 +139,23 @@ public class FlappyGame implements Runnable {
             playing.getPlayer().resetDirBooleans();
     }
 
+    public GameOptions getGameOptions() {
+        return gameOptions;
+    }
+
     public Menu getMenu() {
         return menu;
     }
 
-    public Playing getPlaying() {
+    public static Playing getPlaying() {
         return playing;
+    }
+
+    public AudioOptions getAudioOptions() {
+        return audioOptions;
+    }
+
+    public static AudioPlayer getAudioPlayer() {
+        return audioPlayer;
     }
 }

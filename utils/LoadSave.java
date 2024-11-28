@@ -48,6 +48,7 @@ public class LoadSave {
     public static final String STATUS_BAR = "health_power_bar.png";
     // Start adding backgrounds in this class.
     // See Playing.java
+    public static final String OPTIONS_MENU = "options_background.png";
 
     public static final String FlappyCity_BG_IMG = "scene_chatGPT.png";  // This is the background created by CHAT_GPT.
     public static final String GROUND_IMG = "seamless_ground.png";  // This is the background created by CHAT_GPT.

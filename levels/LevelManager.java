@@ -11,6 +11,8 @@ public class LevelManager {
     private FlappyGame flappyGame;
     private BufferedImage[] levelSprite;
     private Level levelOne;
+    private int lvlIndex = 0;
+
 
     public LevelManager(FlappyGame flappyGame) {
         this.flappyGame = flappyGame;
@@ -46,8 +48,12 @@ public class LevelManager {
 
     public void update() {
     }
-
     public Level getCurrentLevel() {
         return levelOne;
     }
+
+    public int getLevelIndex() {
+        return lvlIndex;
+    }
+
 }

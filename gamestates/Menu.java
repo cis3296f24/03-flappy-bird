@@ -76,18 +76,17 @@ public class Menu extends State implements Statemethods {
             if (isIn(e, mb)) {
                 if (mb.isMousePressed())
                     mb.applyGamestate();
+                if (mb.getState() == Gamestate.PLAYING)
+                    FlappyGame.getAudioPlayer().setLevelSong(FlappyGame.getPlaying().getLevelManager().getLevelIndex());
                 break;
             }
         }
-
         resetButtons();
-
     }
 
     private void resetButtons() {
         for (MenuButton mb : buttons)
             mb.resetBools();
-
     }
 
     @Override
