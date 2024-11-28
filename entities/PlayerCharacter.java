@@ -6,7 +6,9 @@ import utils.LoadSave;
 import static utils.Constants.PlayerConstants.*;
 
 public enum PlayerCharacter {
-
+    // Meaning of the these numbers: These digits are for x by y sprite sheets. The bird sheet is only one row
+    // therefore the values for all actions is just for the flying animation for row 0 since we are
+    // not using sheets which contain birds in rows and columns For eagle all the values are 0 except after load save.
     PIRATE( 5, 6, 3, 1, 3, 4, 8,
             0, 1, 2, 3, 4, 5, 6,
             LoadSave.PLAYER_PIRATE, 7, 8, 64, 40,20, 27, 21, 4),
@@ -19,12 +21,17 @@ public enum PlayerCharacter {
     EAGLE(0, 0, 0, 0, 0,
             0,0,0,0, 0, 0, 0,
             0,0,
-            LoadSave.PLAYER_EAGLE,0,0,100,100,12,18,44,39);
+            LoadSave.PLAYER_EAGLE,11,0,180,0,1,18,0,0);
+    // Follow this old code to understand the H, W, x ,y etc.
+    //   This loads the EAGLE properly.
+    // j was row amount
+    // i was column amount
+    //   animations[j][i] = img.getSubimage(i * 180 + 30, 0, 200, 185);
 
     public int spriteA_IDLE, spriteA_RUNNING, spriteA_JUMP, spriteA_FALLING, spriteA_ATTACK, spriteA_HIT, spriteA_DEAD;
     public int rowIDLE, rowRUNNING, rowJUMP, rowFALLING, rowATTACK, rowHIT, rowDEAD;
     public String playerAtlas;
-    public int rowA, colA;
+    public int rowAmount, colAmount;
     public int spriteW, spriteH;
     public int hitboxW, hitboxH;
     public int xDrawOffset, yDrawOffset;
@@ -38,8 +45,9 @@ public enum PlayerCharacter {
     PlayerCharacter(int spriteA_IDLE, int spriteA_RUNNING, int spriteA_JUMP, int spriteA_FALLING,
                     int spriteA_ATTACK, int spriteA_HIT, int spriteA_DEAD,
                     int rowIDLE, int rowRUNNING, int rowJUMP, int rowFALLING, int rowATTACK, int rowHIT, int rowDEAD,
-                    String playerAtlas, int rowA, int colA, int spriteW, int spriteH, int hitboxW, int hitboxH,
+                    String playerAtlas, int rowAmount, int colAmount, int spriteW, int spriteH, int hitboxW, int hitboxH,
                     int xDrawOffset, int yDrawOffset) {
+
         // this.spriteA_FLY = spriteA_FLY;
         this.spriteA_IDLE = spriteA_IDLE;
         this.spriteA_RUNNING = spriteA_RUNNING;
@@ -58,8 +66,8 @@ public enum PlayerCharacter {
         this.rowDEAD = rowDEAD;
 
         this.playerAtlas = playerAtlas;
-        this.rowA = rowA;
-        this.colA = colA;
+        this.rowAmount = rowAmount;
+        this.colAmount = colAmount;
         this.spriteW = spriteW;
         this.spriteH = spriteH;
 

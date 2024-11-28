@@ -2,6 +2,7 @@ package utils;
 
 import entities.PlayerCharacter;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 // import main.FlappyGame;
 
@@ -89,20 +91,54 @@ public class LoadSave {
     public static final String FlappyLayer_3 = Folder + "Layer_3.png";  // This is the background downloaded from free sites.
     static int totalPipeCount = 0;
 
-    public static BufferedImage[][] loadAnimations(PlayerCharacter pc) {
-        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
-        BufferedImage[][] animations = new BufferedImage[pc.rowA][pc.colA];
-        for (int j = 0; j < animations.length; j++)
-            for (int i = 0; i < animations[j].length; i++)
-                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
+    // This tester will troubleshoot loading sprites or large images.
+    public static void LoadSaveTester(String fileName) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                // Replace this with your own PNG image input stream
+                InputStream inputStream = LoadSave.class.getResourceAsStream("/" + fileName);
+                if (inputStream == null) {
+                    throw new IOException("Image resource not found");
+                }
+                BufferedImage image = ImageIO.read(inputStream);
+                if (image == null) {
+                    throw new IOException("Failed to load image");
+                }
+                JFrame frame = new JFrame("Image Display");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(image.getWidth(), image.getHeight());
+                // Display the image
+                JLabel label = new JLabel(new ImageIcon(image));
+                frame.getContentPane().add(label, BorderLayout.CENTER);
+                frame.setVisible(true);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error loading image: " + e.getMessage(),
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
 
+    public static BufferedImage[][] loadAnimations(PlayerCharacter pc) {
+        System.out.println("Loading animations <<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println("spriteW = " + pc.spriteW);
+        System.out.println("spriteH = " + pc.spriteH);
+        BufferedImage img = LoadSave.GetSpriteAtlas(pc.playerAtlas);
+        BufferedImage[][] animations = new BufferedImage[pc.rowAmount][pc.colAmount];
+        System.out.println("loaded animations: " + animations.length);
+        for (int j = 0; j < animations.length; j++)
+            for (int i = 0; i < animations[j].length; i++) {
+                // System.out.println("j = " + j + "i = " + i);
+                animations[j][i] = img.getSubimage(i * pc.spriteW, j * pc.spriteH, pc.spriteW, pc.spriteH);
+            }
         return animations;
     }
 
     public static BufferedImage GetSpriteAtlas(String fileName) {
+        // LoadSaveTester(fileName); // Load to see if all images are loading. Note: Loads all images but easy to close all.
         BufferedImage img = null;
+        // System.out.println("Loading animations     " + fileName);
         InputStream is = LoadSave.class.getResourceAsStream("/" + fileName);
-        System.out.println("Loading filename " + fileName);
         try {
             img = ImageIO.read(is);
 
@@ -117,7 +153,6 @@ public class LoadSave {
         }
         return img;
     }
-
 
     public static BufferedImage[] GetAllLevels() {
         URL url = LoadSave.class.getResource("/lvls");

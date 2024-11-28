@@ -4,26 +4,22 @@ import static utils.Constants.ANI_SPEED;
 import static utils.Constants.PlayerConstants.*;
 import static utils.HelpMethods.*;
 import static utils.Constants.*;
-import static utils.Constants.PlayerConstants.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 
 import gamestates.Playing;
 import main.FlappyGame;
+import utils.Constants;
 import utils.LoadSave;
-
-import audio.AudioPlayer;
 
 
 public class Player extends Entity {
     private BufferedImage[][] animations;
-    private int aniTick, aniIndex, aniSpeed = 25;
+    private int aniTick, aniIndex;
     private int playerAction = IDLE;
     private boolean moving = false, attacking = false;
     private boolean left, up, right, down, jump;
@@ -35,7 +31,7 @@ public class Player extends Entity {
     // Jumping / Gravity
 
     private float airSpeed = 10f;
-    private float gravity = 0.0401111111111111114f * FlappyGame.SCALE; // Change this for gravity
+    // private float gravity = 0.0401111111111111114f * FlappyGame.SCALE; // Moved to constants.
     private float jumpSpeed = -1.725000000000000000f * FlappyGame.SCALE;   // Change this for how high to jump
     private float fallSpeedAfterCollision = 0.5f * FlappyGame.SCALE;
     private boolean inAir = false;
@@ -73,7 +69,8 @@ public class Player extends Entity {
         this.maxHealth = 100;
         this.currentHealth = maxHealth;
         this.playerSpeed = FlappyGame.SCALE * 1.0f;
-        animations = LoadSave.loadAnimations(playerCharacter);
+        animations = LoadSave.loadAnimations(playerCharacter);    // This should load bird animations.
+        System.out.println("Player character loaded    " + playerCharacter);
         statusBarImg = LoadSave.GetSpriteAtlas(LoadSave.STATUS_BAR);
         initHitbox(playerCharacter.hitboxW, playerCharacter.hitboxH);
         // initAttackBox(); // We don't need this for flappy bird.
@@ -192,7 +189,7 @@ public class Player extends Entity {
     // This method makes sure that the bird animations are cycled completely.
     private void updateAnimationTick() {
         aniTick++;
-        if (aniTick >= aniSpeed) {
+        if (aniTick >= ANI_SPEED) {
             aniTick = 0;
             aniIndex++;
             if (aniIndex >= GetSpriteAmount(playerAction)) {
@@ -246,7 +243,7 @@ public class Player extends Entity {
         if (inAir) {
             if (CanMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
                 hitbox.y += airSpeed;
-                airSpeed += gravity;
+                airSpeed += GRAVITY; // Changed from local variable to pull from Constants.
                 updateXPos(xSpeed);
             } else {
                 // This section is true if the bird collides with an area not allowed.

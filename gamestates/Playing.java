@@ -25,8 +25,6 @@ import utils.LoadSave;
 
 import static utils.Constants.FlappyWorldConstants.*;
 import static utils.Constants.PlayerConstants.COLLIDED;
-import static utils.Constants.Dialogue.EXCLAMATION;
-import static utils.Constants.Dialogue.QUESTION;
 
 public class Playing extends State implements Statemethods {
     private Player player;
@@ -117,22 +115,22 @@ public class Playing extends State implements Statemethods {
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
     }
 
-    private void loadDialogue() {
-        //loadDialogueImgs();
-
-        // Load dialogue array with premade objects, that gets activated when needed.
-        // This is a simple
-        // way of avoiding ConcurrentModificationException error. (Adding to a list that
-        // is being looped through.
-
-        for (int i = 0; i < 10; i++)
-            dialogEffects.add(new DialogueEffect(0, 0, EXCLAMATION));
-        for (int i = 0; i < 10; i++)
-            dialogEffects.add(new DialogueEffect(0, 0, QUESTION));
-
-        for (DialogueEffect de : dialogEffects)
-            de.deactive();
-    }
+//    private void loadDialogue() {
+//        //loadDialogueImgs();
+//
+//        // Load dialogue array with premade objects, that gets activated when needed.
+//        // This is a simple
+//        // way of avoiding ConcurrentModificationException error. (Adding to a list that
+//        // is being looped through.
+//
+//        for (int i = 0; i < 10; i++)
+//            dialogEffects.add(new DialogueEffect(0, 0, EXCLAMATION));
+//        for (int i = 0; i < 10; i++)
+//            dialogEffects.add(new DialogueEffect(0, 0, QUESTION));
+//
+//        for (DialogueEffect de : dialogEffects)
+//            de.deactive();
+//    }
 
 //    private void loadDialogueImgs() {
 //        BufferedImage qtemp = LoadSave.GetSpriteAtlas(LoadSave.QUESTION_ATLAS);

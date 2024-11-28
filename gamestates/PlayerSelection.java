@@ -156,37 +156,44 @@ public class PlayerSelection extends State implements Statemethods {
         private final BufferedImage[][] animations;
         private int scale;
 
-        public CharacterAnimation(PlayerCharacter pc) {
-            this.pc = pc;
-            this.scale = (int) (FlappyGame.SCALE + 6);
-            animations = LoadSave.loadAnimations(pc);
-        }
+    public CharacterAnimation(PlayerCharacter pc) {
+        this.pc = pc;
+        this.scale = (int) (FlappyGame.SCALE + 6);
+        System.out.println("Playing Character Animation " + pc);
+        animations = LoadSave.loadAnimations(pc);
+    }
 
-        public void draw(Graphics g, int drawX, int drawY) {
-            System.out.println("Drawing character animations  " + drawX + " " + drawY + "  IDLE, aniIndex  " + IDLE + " " + aniIndex);
-            System.out.println("animations   " + animations.length);
-            g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],
-                    drawX - pc.spriteW * scale / 2,
-                    drawY - pc.spriteH * scale / 2,
-                    pc.spriteW * scale,
-                    pc.spriteH * scale,
-                    null);
-        }
+    public void draw(Graphics g, int drawX, int drawY) {
+        System.out.println("Drawing character animations  " + drawX + " " + drawY + "  IDLE, aniIndex  " + IDLE + " " + aniIndex);
+        System.out.println("animations   " + animations.length);
+        System.out.println("Animation Index  " + aniIndex);
+        System.out.println("pc =" + pc.toString());
+        System.out.println("pc.spriteW = " + pc.spriteW);
+        System.out.println("pc.spriteH = " + pc.spriteH);
+        System.out.println("pc.getRowIndex " + pc.getRowIndex(IDLE));
+        System.out.println("Second param (drawX - pc.spriteW * scale / 2) " + (drawX - pc.spriteW * scale / 2));
+        System.out.println("third param (drawY - pc.spriteH * scale / 2)  " + (drawY - pc.spriteH * scale / 2));
 
-        public void update() {
-            aniTick++;
-            if (aniTick >= ANI_SPEED) {
-                aniTick = 0;
-                aniIndex++;
-                if (aniIndex >= pc.getSpriteAmount(IDLE)) {
-                    aniIndex = 0;
+        // LoadSave.LoadSaveTester(pc.playerAtlas);
+        // NOTE: Don't forget the bird does not have any other states it is just IDLE = FLYING, e.g. not ATTACKING etc.
+        g.drawImage(animations[pc.getRowIndex(IDLE)][aniIndex],drawX - pc.spriteW * scale / 2,drawY - pc.spriteH * scale / 2,
+                pc.spriteW * scale,pc.spriteH * scale,null);
+    }
 
-                }
+    public void update() {
+        aniTick++;
+        if (aniTick >= ANI_SPEED) {
+            aniTick = 0;
+            aniIndex++;
+            if (aniIndex >= pc.getSpriteAmount(IDLE)) {
+                aniIndex = 0;
+
             }
         }
-
-        public PlayerCharacter getPc() {
-            return pc;
-        }
     }
+
+    public PlayerCharacter getPc() {
+        return pc;
+    }
+}
 }
