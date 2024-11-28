@@ -1,6 +1,8 @@
 package utils;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 import main.FlappyGame;
@@ -32,35 +34,6 @@ public class HelpMethods {
         return false;
     }
 
-    // Old method not working.
-//    public static void updateBirdScoreOld(float x, float y, int[][] lvlData) {
-//        int xIndex = (int) (x / FlappyGame.TILE_SIZE);
-//        int yIndex = (int) (y / FlappyGame.TILE_SIZE);
-//        int value = lvlData[yIndex][xIndex];
-//
-//        // Check if bird enters the score tile
-//        if (value == 23 && !birdEntered) {
-//            birdEntered = true;
-//            birdExited = false;
-//            System.out.println("Bird entered the scoring zone");
-//        }
-//        // Check if bird exits the score tile by moving to a non score tile
-//        if (birdEntered && !birdExited) {
-//            if (xIndex > 0 && xIndex < lvlData[0].length - 1) {
-//                int nextValue = lvlData[yIndex][xIndex + 1];
-//                int previousValue = lvlData[yIndex][xIndex - 1];
-//
-//                // If the bird moves from the tile 23 to another tile
-//                if (nextValue == 11 || previousValue == 11) {
-//                    birdExited = true;
-//                    birdEntered = false;
-//                    birdScore++;
-//                    System.out.println("Bird exited the scoring zone. Current score: " + birdScore);
-//                }
-//            }
-//        }
-//    }
-
     public static boolean IsSolid(float x, float y, int[][] lvlData) {
         //System.out.println("lvlData[1][1]: " + lvlData[1][1]);
         //System.out.println("lvlData: " + Arrays.stream(lvlData).allMatch(23));
@@ -77,27 +50,6 @@ public class HelpMethods {
         float xIndex = x / FlappyGame.TILE_SIZE;
         float yIndex = y / FlappyGame.TILE_SIZE;
         int value = lvlData[(int) yIndex][(int) xIndex];
-
-//        int nextValue = lvlData[(int) yIndex][(int) xIndex + 1];
- //       int previousValue = lvlData[(int) yIndex][(int) xIndex - 1];
-
-//        if ((value == 23) & (nextValue == 11) & (!(birdEntered) & (birdExited)))  {
-//
-//            birdEntered = true;
-//
-//            System.out.println("Bird entered                  <<<<<<<<<<    ");
-//            if ((value == 23 ) & (lvlData[(int) yIndex][(int) xIndex + 1] == 11  )) {
-//                birdExited = true; // If the bird reached the end and next tile is 11 before tile 23.
-//                // birdEntered = false;
-//                System.out.println("Bird is exiting after this ");
-//                // birdScore++;
-//            }
-//        }
-//
-//        if ((value == 11) & (birdExited))  {
-//                birdEntered = false;
-//               // System.out.println("Entered second if statement !");
-//        }
 
         if (value == 23) {
             return false;
@@ -145,4 +97,58 @@ public class HelpMethods {
         return true;
 
     }
+
+    public static Point GetPlayerSpawn(BufferedImage img) {
+        for (int j = 0; j < img.getHeight(); j++)
+            for (int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color(img.getRGB(i, j));
+                int value = color.getGreen();
+                if (value == 100)
+                    return new Point(i * FlappyGame.TILE_SIZE, j * FlappyGame.TILE_SIZE);
+            }
+        return new Point(1 * FlappyGame.TILE_SIZE, 1 * FlappyGame.TILE_SIZE);
+    }
+
+    // This method loads the level and uses getHeight and getWidth of the small pixel board.
+    public static int[][] GetLevelData(BufferedImage img) {
+        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+        for (int j = 0; j < img.getHeight(); j++)
+            for (int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color(img.getRGB(i, j));
+                int value = color.getRed();
+                if (value >= 48)
+                    value = 0;
+                lvlData[j][i] = value;
+            }
+        return lvlData;
+    }
+
+      // This method was inside LoadSave but now is moved to this class.
+      // Following the template of Kaarin game to keep consistent and not loose functionality.
+      // This method loads the level and uses getHeight and getWidth of the small pixel board.
+//    public static int[][] GetLevelData() {
+//        totalPipeCount = 0;
+//        BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+//        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+//        //System.out.println("img height: " + img.getHeight());
+//        System.out.println("img width: " + img.getWidth());
+//        for (int j = 0; j < img.getHeight(); j++)
+//            for (int i = 0; i < img.getWidth(); i++) {
+//                Color color = new Color(img.getRGB(i, j));
+//                int value = color.getRed();
+//                if (value >= 48)
+//                    value = 0;
+//                lvlData[j][i] = value;
+//                if (lvlData[j][i] == 15) {
+//                    totalPipeCount++; // Count total # of pipes.
+//                    System.out.println("Total Pipes = " + totalPipeCount);
+//
+//                }
+//            }
+//        // System.out.println("PIPE # " + totalPipeCount);
+//        return lvlData;
+//
+//    }
+
+
 }

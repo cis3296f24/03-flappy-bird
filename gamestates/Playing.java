@@ -16,7 +16,9 @@ import utils.LoadSave;
 
 import static utils.Constants.FlappyWorldConstants.*;
 import static utils.Constants.PlayerConstants.COLLIDED;
-import static utils.LoadSave.GetLevelData;
+import static utils.HelpMethods.GetLevelData;
+import static utils.LoadSave.GetSpriteAtlas;
+import static utils.LoadSave.LEVEL_ONE_DATA;
 
 public class Playing extends State implements Statemethods {
     private Player player;
@@ -25,12 +27,12 @@ public class Playing extends State implements Statemethods {
     private PauseOverlay pauseOverlay;
     private GameOverOverlay gameOverOverlay;     // Added for the bird when it collides.
     private boolean paused = false;
+    BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
 
     private int xLvlOffset;
-
     private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
     private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
-    private int lvlTilesWide = GetLevelData()[0].length;
+    private int lvlTilesWide = GetLevelData(img)[0].length;
     private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
     private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
 
@@ -51,18 +53,26 @@ public class Playing extends State implements Statemethods {
     private boolean lvlCompleted;
     private boolean playerDying;
 
-    int[][] lvlData = GetLevelData(); // Imported this here to add score keeping
+    int[][] lvlData = GetLevelData(null); // Imported this here to add score keeping
+
 
     // get the background.
     public Playing(FlappyGame flappyGame) {
         super(flappyGame);
         initClasses();
-        backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.FlappyCity_BG_IMG);    // This line loads the flappy background.
-        flappyGroundImg = LoadSave.GetSpriteAtlas(LoadSave.GROUND_IMG);         // This will create the floor or flappy ground.
-        flappyBKGLayer1 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_1);
-        flappyBKGLayer2 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_2);
-        flappyBKGLayer3 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_3);
+        backgroundImg = GetSpriteAtlas(LoadSave.FlappyCity_BG_IMG);    // This line loads the flappy background.
+        flappyGroundImg = GetSpriteAtlas(LoadSave.GROUND_IMG);         // This will create the floor or flappy ground.
+        flappyBKGLayer1 = GetSpriteAtlas(LoadSave.FlappyLayer_1);
+        flappyBKGLayer2 = GetSpriteAtlas(LoadSave.FlappyLayer_2);
+        flappyBKGLayer3 = GetSpriteAtlas(LoadSave.FlappyLayer_3);
     }
+
+    public void loadNextLevel() {
+        resetAll();
+        levelManager.loadNextLevel();
+        player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
+    }
+
 
     // To change the initial location of the bird change new Player (x, y ..............
     private void initClasses() {
@@ -226,6 +236,10 @@ public class Playing extends State implements Statemethods {
 
     }
 
+    public void setMaxLvlOffset(int lvlOffset) {
+        this.maxLvlOffsetX = lvlOffset;
+    }
+
     public void mouseDragged(MouseEvent e) {
         if (paused)
             pauseOverlay.mouseDragged(e);
@@ -262,6 +276,10 @@ public class Playing extends State implements Statemethods {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public LevelManager getLevelManager() {
+        return levelManager;
     }
 
     public void setPlayerDying(boolean playerDying) {

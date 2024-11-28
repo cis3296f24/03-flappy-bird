@@ -71,6 +71,14 @@ public class Player extends Entity {
         this.currentHealth = 35;
     }
 
+    public void setSpawn(Point spawn) {
+        this.x = spawn.x;
+        this.y = spawn.y;
+        hitbox.x = x;
+        hitbox.y = y;
+    }
+
+
     // The logic in this method works as a toggle switch to keep score
     // It avoids duplicating the score if the bird spends too much inside the fly zone.
     public void updateBirdScore(float x, float y, int[][] lvlData) {

@@ -2,6 +2,7 @@ package gamestates;
 
 import java.awt.event.MouseEvent;
 
+import audio.AudioPlayer;
 import main.FlappyGame;
 import ui.MenuButton;
 
@@ -21,4 +22,14 @@ public class State {
     public FlappyGame getGame() {
         return flappyGame;
     }
+
+    public void setGamestate(Gamestate state) {
+        switch (state) {
+            case MENU -> flappyGame.getAudioPlayer().playSong(AudioPlayer.MENU_1);
+            case PLAYING -> flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
+        }
+
+        Gamestate.state = state;
+    }
+
 }
