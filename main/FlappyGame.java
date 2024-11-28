@@ -25,7 +25,6 @@ public class FlappyGame implements Runnable {
     private AudioOptions audioOptions;
     private static AudioPlayer audioPlayer;
 
-
     public final static int TILES_DEFAULT_SIZE = 32;
     public final static float SCALE = 2.0f;
     public final static int TILES_IN_WIDTH = 26;
@@ -38,6 +37,7 @@ public class FlappyGame implements Runnable {
 
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
+        gamePanel.setFocusable(true);
         gamePanel.requestFocus();
 
         startGameLoop();
@@ -45,11 +45,12 @@ public class FlappyGame implements Runnable {
     }
 
     private void initClasses() {
-        audioOptions = new AudioOptions();
+        audioOptions = new AudioOptions(this);
+        audioPlayer = new AudioPlayer();
         menu = new Menu(this);
         playing = new Playing(this);
         gameOptions = new GameOptions(this);
-        audioPlayer = new AudioPlayer();
+
     }
 
     private void startGameLoop() {

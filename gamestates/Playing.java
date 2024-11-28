@@ -73,6 +73,12 @@ public class Playing extends State implements Statemethods {
         gameOverOverlay = new GameOverOverlay(this);    // Added for when the bird dies after collision.
     }
 
+    public void loadNextLevel() {
+        resetAll();
+        levelManager.loadNextLevel();
+        player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
+    }
+
     @Override
     public void update() {
         if (!paused && !gameOver) {

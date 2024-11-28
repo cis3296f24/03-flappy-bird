@@ -46,6 +46,8 @@ public class LoadSave {
     public static final String VOLUME_BUTTONS = "volume_buttons.png";
     public static final String MENU_BACKGROUND_IMG = "background_menu.png";
     public static final String STATUS_BAR = "health_power_bar.png";
+    public static final String COMPLETED_IMG = "completed_sprite.png";
+
     // Start adding backgrounds in this class.
     // See Playing.java
     public static final String OPTIONS_MENU = "options_background.png";
