@@ -61,6 +61,7 @@ public class Player extends Entity {
         this.state = IDLE;
         this.maxHealth = 100;
         initHitbox(1, 27);
+
         // this.currentHealth = 35;
         // this.walkSpeed = FlappyGame.SCALE;
 
@@ -71,6 +72,7 @@ public class Player extends Entity {
         // Each bird will be different depending on the resolution.
         // We may need to create several variables for different birds, eagle, crow etc.
         // initHitbox(x, y, (0 * FlappyGame.SCALE) + 1, 15 * FlappyGame.SCALE);
+
         this.currentHealth = 35;
     }
 
@@ -149,8 +151,8 @@ public class Player extends Entity {
     }
 
     public void setUpdateHealthBar(int birdHealth) {
-        currentHealth = birdHealth;
-        //currentHealth = maxHealth; // Resetting this for testing.
+       // currentHealth = birdHealth;
+        currentHealth = maxHealth; // Resetting this for testing.
     }
 
     // Added second parameter for scrolling. - Shafiq
