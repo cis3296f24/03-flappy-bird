@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import entities.Player;
 import levels.LevelManager;
 import main.FlappyGame;
+import org.lwjgl.util.zstd.ZSTDOutBuffer;
 import ui.GameOverOverlay;
 import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
@@ -18,6 +19,8 @@ import utils.LoadSave;
 import static utils.Constants.FlappyWorldConstants.*;
 import static utils.Constants.PlayerConstants.COLLIDED;
 import static utils.HelpMethods.GetLevelData;
+import static utils.LoadSave.GetSpriteAtlas;
+import static utils.LoadSave.LEVEL_ONE_DATA;
 
 public class Playing extends State implements Statemethods {
     private Player player;
@@ -27,13 +30,24 @@ public class Playing extends State implements Statemethods {
     private GameOverOverlay gameOverOverlay;     // Added for the bird when it collides.
     private boolean paused = false;
 
-    private int xLvlOffset;
-    // private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
-    // private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
-    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
-    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
-    private int maxLvlOffsetX;
+//    private int xLvlOffset;
+//    // private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
+//    // private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
+//    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
+//    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH);
+//    private int maxLvlOffsetX;
 
+    // Added this to get the width of the map.
+    // BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);  // For single map game
+    BufferedImage[] img = LoadSave.GetAllLevels(); // For multi level game
+
+    private int xLvlOffset;
+    private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
+    private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
+    // private int lvlTilesWide = GetLevelData(img)[0].length;
+    private int lvlTilesWide = img[0].getNumXTiles(); // Multi level game. Load the length of the map.
+    private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
+    private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
     private LevelCompletedOverlay levelCompletedOverlay;
 
 //    private int lvlTilesWide = GetLevelData()[0].length;
@@ -63,12 +77,12 @@ public class Playing extends State implements Statemethods {
     public Playing(FlappyGame flappyGame) {
         super(flappyGame);
         initClasses();
-        backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.FlappyCity_BG_IMG);    // This line loads the flappy background.
-        flappyGroundImg = LoadSave.GetSpriteAtlas(LoadSave.GROUND_IMG);         // This will create the floor or flappy ground.
-        flappyBKGLayer1 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_1);
-        flappyBKGLayer2 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_2);
-        flappyBKGLayer3 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_3);
-
+        backgroundImg = GetSpriteAtlas(LoadSave.FlappyCity_BG_IMG);    // This line loads the flappy background.
+        flappyGroundImg = GetSpriteAtlas(LoadSave.GROUND_IMG);         // This will create the floor or flappy ground.
+        flappyBKGLayer1 = GetSpriteAtlas(LoadSave.FlappyLayer_1);
+        flappyBKGLayer2 = GetSpriteAtlas(LoadSave.FlappyLayer_2);
+        flappyBKGLayer3 = GetSpriteAtlas(LoadSave.FlappyLayer_3);
+        System.out.println("lvlTilesWide " + lvlTilesWide);
     }
 
     // To change the initial location of the bird change new Player (x, y ..............
