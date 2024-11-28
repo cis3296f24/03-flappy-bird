@@ -33,6 +33,9 @@ public class Level {
         lvlTilesWide = img.getWidth();
         maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
         maxLvlOffsetX = FlappyGame.TILE_SIZE * maxTilesOffset;
+        System.out.println("Level.java var lvlTilesWide: " + lvlTilesWide);
+        System.out.println("maxTilesOffset: " + maxTilesOffset);
+        System.out.println("maxLvlOffsetX: " + maxLvlOffsetX);
     }
 
     private void calcPlayerSpawn() {
@@ -52,5 +55,11 @@ public class Level {
     }
     public int getLvlOffset() {
         return maxLvlOffsetX;
+    }
+    public int getMaxLvlOffsetX() {
+        return maxLvlOffsetX;
+    }
+    public int getMaxTilesOffset() {
+        return maxTilesOffset;
     }
 }
