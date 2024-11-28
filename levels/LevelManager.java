@@ -23,14 +23,16 @@ public class LevelManager {
     }
 
     public void loadNextLevel() {
+        System.out.println("LoadNextLevel inside LevelManager called ....");
+
         lvlIndex++;
         if (lvlIndex >= levels.size()) {
             lvlIndex = 0;
             System.out.println("No more levels! FlappyGame Completed!");
             Gamestate.state = Gamestate.MENU;
         }
-
         Level newLevel = levels.get(lvlIndex);
+        System.out.println("LoadNextLevel inside LevelManager called ....");
         // flappyGame.getPlaying().getEnemyManager().loadEnemies(newLevel);
         flappyGame.getPlaying().getPlayer().loadLvlData(newLevel.getLevelData());
         flappyGame.getPlaying().setMaxLvlOffset(newLevel.getLvlOffset());

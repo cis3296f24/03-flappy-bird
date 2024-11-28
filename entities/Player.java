@@ -58,7 +58,7 @@ public class Player extends Entity {
         this.playing = playing;
         this.state = IDLE;
         this.maxHealth = 100;
-        initHitbox(2, 27);
+        initHitbox(1, 27);
         // this.currentHealth = 35;
         // this.walkSpeed = FlappyGame.SCALE;
 
@@ -367,10 +367,9 @@ public class Player extends Entity {
     public void resetAll() {
         resetDirBooleans();
         inAir = true; // I changed this to true on 11/24/2024 because bird should be in the air.
-        attacking = false;
+        //attacking = false;
         moving = false;
         playerAction = IDLE;
-
         currentHealth = maxHealth;
 
         hitbox.x = x;

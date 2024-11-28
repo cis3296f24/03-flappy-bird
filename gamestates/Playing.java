@@ -94,8 +94,10 @@ public class Playing extends State implements Statemethods {
     }
 
     public void loadNextLevel() {
+        System.out.println("Loading next level from Player.java ...");
         resetAll();
         levelManager.loadNextLevel();
+        System.out.println("levelManager called .");
         player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
     }
 
@@ -203,6 +205,8 @@ public class Playing extends State implements Statemethods {
     public void resetAll() {
         gameOver = false;
         paused = false;
+        lvlCompleted = false;
+        playerDying = false;
         player.resetAll();
     }
 
