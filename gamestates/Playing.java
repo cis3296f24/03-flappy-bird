@@ -33,15 +33,22 @@ public class Playing extends State implements Statemethods {
 
     BufferedImage[] img = LoadSave.GetAllLevels(); // For multi level game
 
+    // Setting x offset to be 1024 as a fixed var until we figure out.
+    // how to get the x level length from another class.
+
     private int xLvlOffset;
     private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
     private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
+    // private int lvlTilesWide = GetLevelData()[0].length;
+    private int lvlTilesWide = 1024;
+    private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
+    private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
 
         // private int lvlTilesWide = GetLevelData(img)[0].length;
         // Note these variables are now loading inside Level.java
-        private int lvlTilesWide = 0;   // loading inside Level.java
-        private int maxTilesOffset = 0; // loading inside Level.java
-        private int maxLvlOffsetX = 0;  // loading inside Level.java
+        //        private int lvlTilesWide = 0;   // loading inside Level.java
+        //        private int maxTilesOffset = 0; // loading inside Level.java
+        //        private int maxLvlOffsetX = 0;  // loading inside Level.java
 
     private LevelCompletedOverlay levelCompletedOverlay;
 
@@ -66,22 +73,15 @@ public class Playing extends State implements Statemethods {
 
     // get the background.
 
-    public int getLvlOffset() {
-        return maxLvlOffsetX;
-    }
-    public int getMaxLvlOffsetX() {
-        return maxLvlOffsetX;
-    }
-    public int getMaxTilesOffset() {
-        return maxTilesOffset;
-    }
     public Playing(FlappyGame flappyGame) {
         super(flappyGame);
-        this.maxLvlOffsetX = getLvlOffset();
-        this.maxTilesOffset = getMaxTilesOffset();
-        this.maxTilesOffset = 
         initClasses();
-        Level.calcLvlOffsets();
+
+          // Trouble getting the 1024 passed over to this.maxlvlOffsetX
+//        this.maxLvlOffsetX = getLvlOffset();
+//        this.maxTilesOffset = getMaxTilesOffset();
+//        this.maxTilesOffset = maxTilesOffset;
+//        Level.calcLvlOffsets();
         backgroundImg = GetSpriteAtlas(LoadSave.FlappyCity_BG_IMG);    // This line loads the flappy background.
         flappyGroundImg = GetSpriteAtlas(LoadSave.GROUND_IMG);         // This will create the floor or flappy ground.
         flappyBKGLayer1 = GetSpriteAtlas(LoadSave.FlappyLayer_1);

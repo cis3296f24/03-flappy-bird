@@ -62,4 +62,14 @@ public class Level {
     public int getMaxTilesOffset() {
         return maxTilesOffset;
     }
+//    public int getLvlOffset() {
+//        return maxLvlOffsetX;
+//    }
+//    public int getMaxLvlOffsetX() {
+//        return maxLvlOffsetX;
+//    }
+//    public int getMaxTilesOffset() {
+//        return maxTilesOffset;
+//    }
+
 }
