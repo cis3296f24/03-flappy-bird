@@ -85,6 +85,7 @@ public class Player extends Entity {
         int xIndex = (int) (x / FlappyGame.TILE_SIZE);
         int yIndex = (int) (y / FlappyGame.TILE_SIZE);
         int currentValue = lvlData[yIndex][xIndex];
+
         if (currentValue == 23) {
             // Bird is on the scoring tile
             if (!birdEntered) {
@@ -102,6 +103,7 @@ public class Player extends Entity {
             }
         }
     }
+
 
     private void loadBirdAnimations() {
 
