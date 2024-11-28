@@ -135,27 +135,6 @@ public class Playing extends State implements Statemethods {
         }
     }
 
-//    private void checkCloseToBorder() {
-//
-//        // System.out.println("xLvlOffset: " + xLvlOffset);
-//
-//        int playerX = (int) player.getHitbox().x;
-//        int diff = playerX - xLvlOffset;
-//
-//        System.out.println("xLvlOffset: " + xLvlOffset + " playerX +  diff: " + diff);
-//
-//        if (diff > rightBorder)
-//            xLvlOffset += diff - rightBorder;
-//        else if (diff < leftBorder)
-//            xLvlOffset += diff - leftBorder; // <--------------------------------- center bird
-//
-//        if (xLvlOffset > maxLvlOffsetX)
-//            xLvlOffset = maxLvlOffsetX;
-//        else if (xLvlOffset < 0)
-//            xLvlOffset = 0;
-//    }
-
-
     private void checkCloseToBorder() {
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
@@ -180,22 +159,7 @@ public class Playing extends State implements Statemethods {
     // I added (int) (xLvlOffset * 0.07) to subtract from the background so it appears to be moving.
     @Override
     public void draw(Graphics g) {
-//        backgroundImgMoved = -xLvlOffset * backgroundImgSpeed;
-//
-//        // Calculate the position where the background needs to reset/loop
-//        int bgLoopPoint = FlappyGame.GAME_WIDTH;
-//
-//        // Draw the first instance of the background image
-//        g.drawImage(backgroundImg, (int) backgroundImgMoved, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
-//
-//        // Check if a second instance needs to be drawn for smooth looping
-//        if (backgroundImgMoved + bgLoopPoint < bgLoopPoint) {
-//            g.drawImage(backgroundImg, (int) backgroundImgMoved + bgLoopPoint, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
-//        }
 
-        // backgroundImgCounter += 1;
-        // System.out.println("backgroundImgCounter: " + backgroundImgCounter);
-        // System.out.println("xLvlOffset: " + xLvlOffset);
         backgroundImgL1Speed = -xLvlOffset * backLayer1Speed;
         backgroundImgL2Speed = -xLvlOffset * backLayer2Speed;
         // System.out.println("xLvlOffset: " + xLvlOffset / 3);

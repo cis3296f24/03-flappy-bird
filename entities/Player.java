@@ -12,6 +12,8 @@ import gamestates.Playing;
 import main.FlappyGame;
 import utils.LoadSave;
 
+// Note values below 0.0401111111111111114f ets are set this way for
+// programmer visibility and easy to see when coding flappy bird.
 public class Player extends Entity {
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
