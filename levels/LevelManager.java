@@ -57,7 +57,7 @@ public class LevelManager {
         for (int j = 0; j < FlappyGame.TILES_IN_HEIGHT; j++)
             for (int i = 0; i < levels.get(lvlIndex).getLevelData()[0].length; i++) {
                 int index = levels.get(lvlIndex).getSpriteIndex(i, j);
-                g.drawImage(levelSprite[index], FlappyGame.TILES_SIZE * i - lvlOffset, FlappyGame.TILES_SIZE * j, FlappyGame.TILES_SIZE, FlappyGame.TILES_SIZE, null);
+                g.drawImage(levelSprite[index], FlappyGame.TILE_SIZE * i - lvlOffset, FlappyGame.TILE_SIZE * j, FlappyGame.TILE_SIZE, FlappyGame.TILE_SIZE, null);
             }
     }
 

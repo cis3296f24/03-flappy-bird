@@ -10,13 +10,14 @@ import entities.Player;
 import levels.LevelManager;
 import main.FlappyGame;
 import ui.GameOverOverlay;
+import ui.LevelCompletedOverlay;
 import ui.PauseOverlay;
 
 import utils.LoadSave;
 
 import static utils.Constants.FlappyWorldConstants.*;
 import static utils.Constants.PlayerConstants.COLLIDED;
-import static utils.LoadSave.GetLevelData;
+import static utils.HelpMethods.GetLevelData;
 
 public class Playing extends State implements Statemethods {
     private Player player;
@@ -27,12 +28,16 @@ public class Playing extends State implements Statemethods {
     private boolean paused = false;
 
     private int xLvlOffset;
-
     private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH) / 2;
     private int rightBorder = (int) (0.8 * FlappyGame.GAME_WIDTH) / 2;
-    private int lvlTilesWide = GetLevelData()[0].length;
-    private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
-    private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
+    private int xLvlOffsetX;
+
+    private LevelCompletedOverlay levelCompletedOverlay;
+
+//    private int lvlTilesWide = GetLevelData()[0].length;
+//    private int maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
+//    private int maxLvlOffsetX = maxTilesOffset * FlappyGame.TILE_SIZE;
+    private int maxLvlOffsetX;
 
     private BufferedImage backgroundImg, flappyGroundImg;
     private BufferedImage flappyBKGLayer1, flappyBKGLayer2, flappyBKGLayer3;
@@ -51,7 +56,7 @@ public class Playing extends State implements Statemethods {
     private boolean lvlCompleted;
     private boolean playerDying;
 
-    int[][] lvlData = GetLevelData(); // Imported this here to add score keeping
+    // int[][] lvlData = GetLevelData(); // Imported this here to add score keeping
 
     // get the background.
     public Playing(FlappyGame flappyGame) {
@@ -62,15 +67,30 @@ public class Playing extends State implements Statemethods {
         flappyBKGLayer1 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_1);
         flappyBKGLayer2 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_2);
         flappyBKGLayer3 = LoadSave.GetSpriteAtlas(LoadSave.FlappyLayer_3);
+
     }
 
     // To change the initial location of the bird change new Player (x, y ..............
     private void initClasses() {
         levelManager = new LevelManager(flappyGame);
+
         player = new Player(25, (int)(FlappyGame.GAME_HEIGHT / 2), (int) (64 * FlappyGame.SCALE), (int) (40 * FlappyGame.SCALE), this);
         player.loadLvlData(levelManager.getCurrentLevel().getLevelData());
+        player.setSpawn(levelManager.getCurrentLevel().getPlayerSpawn());
+
         pauseOverlay = new PauseOverlay(this);
         gameOverOverlay = new GameOverOverlay(this);    // Added for when the bird dies after collision.
+        levelCompletedOverlay = new LevelCompletedOverlay(this);
+
+    }
+
+    private void calcLvlOffset() {
+        maxLvlOffsetX = levelManager.getCurrentLevel().getLvlOffset();
+    }
+
+    private void loadStartLevel() {
+        // enemyManager.loadEnemies(levelManager.getCurrentLevel());
+        // objectManager.loadObjects(levelManager.getCurrentLevel());
     }
 
     public void loadNextLevel() {
@@ -260,6 +280,17 @@ public class Playing extends State implements Statemethods {
 
     public LevelManager getLevelManager() {
         return levelManager;
+    }
+
+
+    public void setLevelCompleted(boolean levelCompleted) {
+        this.lvlCompleted = levelCompleted;
+        if(levelCompleted)
+            FlappyGame.getAudioPlayer().lvlCompleted();
+    }
+
+    public void setMaxLvlOffset(int lvlOffset) {
+        this.maxLvlOffsetX = lvlOffset;
     }
 
     public void unpauseGame() {

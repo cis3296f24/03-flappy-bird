@@ -2,8 +2,11 @@ package utils;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -51,6 +54,7 @@ public class LoadSave {
     // Start adding backgrounds in this class.
     // See Playing.java
     public static final String OPTIONS_MENU = "options_background.png";
+    public static final String DEATH_SCREEN = "death_screen.png";
 
     public static final String FlappyCity_BG_IMG = "scene_chatGPT.png";  // This is the background created by CHAT_GPT.
     public static final String GROUND_IMG = "seamless_ground.png";  // This is the background created by CHAT_GPT.
@@ -81,29 +85,61 @@ public class LoadSave {
         return img;
     }
 
-    // This method loads the level and uses getHeight and getWidth of the small pixel board.
-    public static int[][] GetLevelData() {
-        totalPipeCount = 0;
-        BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
-        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
-        //System.out.println("img height: " + img.getHeight());
-        System.out.println("img width: " + img.getWidth());
-        for (int j = 0; j < img.getHeight(); j++)
-            for (int i = 0; i < img.getWidth(); i++) {
-                Color color = new Color(img.getRGB(i, j));
-                int value = color.getRed();
-                if (value >= 48)
-                    value = 0;
-                lvlData[j][i] = value;
-                if (lvlData[j][i] == 15) {
-                    totalPipeCount++; // Count total # of pipes.
-                    System.out.println("Total Pipes = " + totalPipeCount);
+//    // This method loads the level and uses getHeight and getWidth of the small pixel board.
+//    public static int[][] GetLevelData() {
+//        totalPipeCount = 0;
+//        BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+//        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+//        //System.out.println("img height: " + img.getHeight());
+//        System.out.println("img width: " + img.getWidth());
+//        for (int j = 0; j < img.getHeight(); j++)
+//            for (int i = 0; i < img.getWidth(); i++) {
+//                Color color = new Color(img.getRGB(i, j));
+//                int value = color.getRed();
+//                if (value >= 48)
+//                    value = 0;
+//                lvlData[j][i] = value;
+//                if (lvlData[j][i] == 15) {
+//                    totalPipeCount++; // Count total # of pipes.
+//                    System.out.println("Total Pipes = " + totalPipeCount);
+//
+//                }
+//        }
+//        // System.out.println("PIPE # " + totalPipeCount);
+//        return lvlData;
+//
+//    }
 
-                }
+    public static BufferedImage[] GetAllLevels() {
+        URL url = LoadSave.class.getResource("/lvls");
+        File file = null;
+
+        try {
+            file = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
-        // System.out.println("PIPE # " + totalPipeCount);
-        return lvlData;
 
+        File[] files = file.listFiles();
+        File[] filesSorted = new File[files.length];
+
+        for (int i = 0; i < filesSorted.length; i++)
+            for (int j = 0; j < files.length; j++) {
+                if (files[j].getName().equals((i + 1) + ".png"))
+                    filesSorted[i] = files[j];
+
+            }
+
+        BufferedImage[] imgs = new BufferedImage[filesSorted.length];
+
+        for (int i = 0; i < imgs.length; i++)
+            try {
+                imgs[i] = ImageIO.read(filesSorted[i]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        return imgs;
     }
 
 }

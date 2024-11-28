@@ -1,6 +1,8 @@
 package utils;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
 import main.FlappyGame;
@@ -11,6 +13,7 @@ public class HelpMethods {
     private static int birdScore = 0;
     // private static boolean birdEntered = false;
     // private static boolean birdExited = true;
+    private Point playerSpawn;
 
 
     public static boolean CanMoveHereNew(float x, float y, float width, float height, int[][] lvlData) {
@@ -61,6 +64,7 @@ public class HelpMethods {
 //        }
 //    }
 
+
     public static boolean IsSolid(float x, float y, int[][] lvlData) {
         //System.out.println("lvlData[1][1]: " + lvlData[1][1]);
         //System.out.println("lvlData: " + Arrays.stream(lvlData).allMatch(23));
@@ -108,6 +112,30 @@ public class HelpMethods {
             // return false;
         }
         return false;
+    }
+
+    public static int[][] GetLevelData(BufferedImage img) {
+        int[][] lvlData = new int[img.getHeight()][img.getWidth()];
+        for (int j = 0; j < img.getHeight(); j++)
+            for (int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color(img.getRGB(i, j));
+                int value = color.getRed();
+                if (value >= 48)
+                    value = 0;
+                lvlData[j][i] = value;
+            }
+        return lvlData;
+    }
+
+    public static Point GetPlayerSpawn(BufferedImage img) {
+        for (int j = 0; j < img.getHeight(); j++)
+            for (int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color(img.getRGB(i, j));
+                int value = color.getGreen();
+                if (value == 100)
+                    return new Point(i * FlappyGame.TILE_SIZE, j * FlappyGame.TILE_SIZE);
+            }
+        return new Point(1 * FlappyGame.TILE_SIZE, 1 * FlappyGame.TILE_SIZE);
     }
 
     public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {

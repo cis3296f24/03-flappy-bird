@@ -1,11 +1,42 @@
 package levels;
+import main.FlappyGame;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+import static utils.HelpMethods.GetLevelData;
+import static utils.HelpMethods.GetPlayerSpawn;
+
 
 public class Level {
 
+    private BufferedImage img;
+    private int lvlTilesWide;
+    private int maxTilesOffset;
+    private int maxLvlOffsetX;
+    private Point playerSpawn;
     private int[][] lvlData;
 
-    public Level(int[][] lvlData) {
-        this.lvlData = lvlData;
+    public Level(BufferedImage img) {
+        // this.lvlData = lvlData;
+        this.img = img;
+        createLevelData();
+        calcLvlOffsets();
+        calcPlayerSpawn();
+    }
+
+    public Point getPlayerSpawn() {
+        return playerSpawn;
+    }
+
+    private void calcLvlOffsets() {
+        lvlTilesWide = img.getWidth();
+        maxTilesOffset = lvlTilesWide - FlappyGame.TILES_IN_WIDTH;
+        maxLvlOffsetX = FlappyGame.TILE_SIZE * maxTilesOffset;
+    }
+
+    private void calcPlayerSpawn() {
+        playerSpawn = GetPlayerSpawn(img);
     }
 
     public int getSpriteIndex(int x, int y) {
@@ -16,4 +47,10 @@ public class Level {
         return lvlData;
     }
 
+    private void createLevelData() {
+        lvlData = GetLevelData(img);
+    }
+    public int getLvlOffset() {
+        return maxLvlOffsetX;
+    }
 }

@@ -58,6 +58,7 @@ public class Player extends Entity {
         this.playing = playing;
         this.state = IDLE;
         this.maxHealth = 100;
+        initHitbox(2, 27);
         // this.currentHealth = 35;
         // this.walkSpeed = FlappyGame.SCALE;
 
@@ -67,8 +68,15 @@ public class Player extends Entity {
         // to get the dimensions correct.
         // Each bird will be different depending on the resolution.
         // We may need to create several variables for different birds, eagle, crow etc.
-        initHitbox(x, y, (0 * FlappyGame.SCALE) + 1, 15 * FlappyGame.SCALE);
+        // initHitbox(x, y, (0 * FlappyGame.SCALE) + 1, 15 * FlappyGame.SCALE);
         this.currentHealth = 35;
+    }
+
+    public void setSpawn(Point spawn) {
+        this.x = spawn.x;
+        this.y = spawn.y;
+        hitbox.x = x;
+        hitbox.y = y;
     }
 
     // The logic in this method works as a toggle switch to keep score
