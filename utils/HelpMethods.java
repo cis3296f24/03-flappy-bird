@@ -111,6 +111,7 @@ public class HelpMethods {
 
     // This method loads the level and uses getHeight and getWidth of the small pixel board.
     public static int[][] GetLevelData(BufferedImage img) {
+        System.out.println("img H and W = " + img.getHeight() + " " + img.getWidth());
         int[][] lvlData = new int[img.getHeight()][img.getWidth()];
         for (int j = 0; j < img.getHeight(); j++)
             for (int i = 0; i < img.getWidth(); i++) {
