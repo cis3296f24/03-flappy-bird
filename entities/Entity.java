@@ -1,41 +1,96 @@
 package entities;
 
+import static utils.Constants.Directions.DOWN;
+import static utils.Constants.Directions.LEFT;
+import static utils.Constants.Directions.UP;
+import static utils.HelpMethods.CanMoveHere;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 
+import main.FlappyGame;
+
 public abstract class Entity {
 
-    protected float x, y;
-    protected int width, height;
-    protected Rectangle2D.Float hitbox;
-    protected int state;
+	protected float x, y;
+	protected int width, height;
+	protected Rectangle2D.Float hitbox;
+	protected int aniTick, aniIndex;
+	protected int state;
+	protected float airSpeed;
+	protected boolean inAir = false;
+	protected int maxHealth;
+	protected int currentHealth;
+	protected Rectangle2D.Float attackBox;
+	protected float walkSpeed;
 
-    public Entity(float x, float y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-    }
+	protected int pushBackDir;
+	protected float pushDrawOffset;
+	protected int pushBackOffsetDir = UP;
 
-    protected void drawHitbox(Graphics g, int xLvlOffset) {
-        // For debugging the hitbox
-        g.setColor(Color.red);
-        g.drawRect((int) hitbox.x - xLvlOffset + 5, (int) hitbox.y + 25, (int) hitbox.width, (int) hitbox.height);
+	public Entity(float x, float y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+	}
 
-    }
+	protected void updatePushBackDrawOffset() {
+		float speed = 0.95f;
+		float limit = -30f;
 
-    protected void initHitbox(float x, float y, float width, float height) {
-        hitbox = new Rectangle2D.Float(x, y, width, height);
-    }
+		if (pushBackOffsetDir == UP) {
+			pushDrawOffset -= speed;
+			if (pushDrawOffset <= limit)
+				pushBackOffsetDir = DOWN;
+		} else {
+			pushDrawOffset += speed;
+			if (pushDrawOffset >= 0)
+				pushDrawOffset = 0;
+		}
+	}
 
-//	protected void updateHitbox() {
-//		hitbox.x = (int) x;
-//		hitbox.y = (int) y;
-//	}
+	protected void pushBack(int pushBackDir, int[][] lvlData, float speedMulti) {
+		float xSpeed = 0;
+		if (pushBackDir == LEFT)
+			xSpeed = -walkSpeed;
+		else
+			xSpeed = walkSpeed;
 
-    public Rectangle2D.Float getHitbox() {
-        return hitbox;
-    }
+		if (CanMoveHere(hitbox.x + xSpeed * speedMulti, hitbox.y, hitbox.width, hitbox.height, lvlData))
+			hitbox.x += xSpeed * speedMulti;
+	}
 
+	protected void drawAttackBox(Graphics g, int xLvlOffset) {
+		g.setColor(Color.red);
+		g.drawRect((int) (attackBox.x - xLvlOffset), (int) attackBox.y, (int) attackBox.width, (int) attackBox.height);
+	}
+
+	protected void drawHitbox(Graphics g, int xLvlOffset) {
+		g.setColor(Color.BLUE);
+		g.drawRect((int) hitbox.x - xLvlOffset, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
+	}
+
+	protected void initHitbox(int width, int height) {
+		hitbox = new Rectangle2D.Float(x, y, (int) (width * FlappyGame.SCALE), (int) (height * FlappyGame.SCALE));
+	}
+
+	public Rectangle2D.Float getHitbox() {
+		return hitbox;
+	}
+
+	public int getState() {
+		return state;
+	}
+
+	public int getAniIndex() {
+		return aniIndex;
+	}
+
+	protected void newState(int state) {
+		this.state = state;
+		aniTick = 0;
+		aniIndex = 0;
+	}
 }

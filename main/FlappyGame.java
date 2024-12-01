@@ -1,41 +1,53 @@
 package main;
 
 import java.awt.Graphics;
-import gamestates.Gamestate;
-import gamestates.Menu;
-import gamestates.Playing;
+
+import audio.AudioPlayer;
+import gamestates.*;
+import ui.AudioOptions;
 
 public class FlappyGame implements Runnable {
 
-    private GameWindow gameWindow;
     private GamePanel gamePanel;
     private Thread gameThread;
-    private final int FPS_SET = 120;  // Frames per second
-    private final int UPS_SET = 200;  // Updates per second
+    private final int FPS_SET = 120;
+    private final int UPS_SET = 200;
 
     private Playing playing;
     private Menu menu;
+    private Credits credits;
+    private PlayerSelection playerSelection;
+    private GameOptions gameOptions;
+    private AudioOptions audioOptions;
+    private AudioPlayer audioPlayer;
 
     public final static int TILES_DEFAULT_SIZE = 32;
-    public final static float SCALE = 2.0f;
-    public final static int TILES_IN_WIDTH = 26;
-    public final static int TILES_IN_HEIGHT = 14;
-    public final static int TILE_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
-    public final static int GAME_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
-    public final static int GAME_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
+    public final static float SCALE = 1.62f; // size of the game windows for different pixel screens.
+    public final static int TILES_IN_WIDTH = 26; // Number of tiles in legend sprite wide.
+    public final static int TILES_IN_HEIGHT = 14; // Number of tiles in legend sprite vertical.
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
+    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
+
+    private final boolean SHOW_FPS_UPS = true;
+
     public FlappyGame() {
+        System.out.println("size: " + GAME_WIDTH + " : " + GAME_HEIGHT);
         initClasses();
         gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
-        gamePanel.requestFocus();
-
+        new GameWindow(gamePanel);
+        gamePanel.requestFocusInWindow();
         startGameLoop();
-
     }
 
     private void initClasses() {
+        audioOptions = new AudioOptions(this);
+        audioPlayer = new AudioPlayer();
         menu = new Menu(this);
         playing = new Playing(this);
+        playerSelection = new PlayerSelection(this);
+        credits = new Credits(this);
+        gameOptions = new GameOptions(this);
     }
 
     private void startGameLoop() {
@@ -45,37 +57,28 @@ public class FlappyGame implements Runnable {
 
     public void update() {
         switch (Gamestate.state) {
-            case MENU:
-                menu.update();
-                break;
-            case PLAYING:
-                playing.update();
-                break;
-            case OPTIONS:
-            case QUIT:
-            default:
-                System.exit(0);
-                break;
-
+            case MENU -> menu.update();
+            case PLAYER_SELECTION -> playerSelection.update();
+            case PLAYING -> playing.update();
+            case OPTIONS -> gameOptions.update();
+            case CREDITS -> credits.update();
+            case QUIT -> System.exit(0);
         }
     }
 
+    @SuppressWarnings("incomplete-switch")
     public void render(Graphics g) {
         switch (Gamestate.state) {
-            case MENU:
-                menu.draw(g);
-                break;
-            case PLAYING:
-                playing.draw(g);
-                break;
-            default:
-                break;
+            case MENU -> menu.draw(g);
+            case PLAYER_SELECTION -> playerSelection.draw(g);
+            case PLAYING -> playing.draw(g);
+            case OPTIONS -> gameOptions.draw(g);
+            case CREDITS -> credits.draw(g);
         }
     }
 
     @Override
     public void run() {
-
         double timePerFrame = 1000000000.0 / FPS_SET;
         double timePerUpdate = 1000000000.0 / UPS_SET;
 
@@ -89,6 +92,7 @@ public class FlappyGame implements Runnable {
         double deltaF = 0;
 
         while (true) {
+
             long currentTime = System.nanoTime();
 
             deltaU += (currentTime - previousTime) / timePerUpdate;
@@ -96,26 +100,32 @@ public class FlappyGame implements Runnable {
             previousTime = currentTime;
 
             if (deltaU >= 1) {
+
                 update();
                 updates++;
                 deltaU--;
+
             }
 
             if (deltaF >= 1) {
+
                 gamePanel.repaint();
                 frames++;
                 deltaF--;
-            }
-
-            if (System.currentTimeMillis() - lastCheck >= 1000) {
-                lastCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + " | UPS: " + updates);
-                frames = 0;
-                updates = 0;
 
             }
+
+            if (SHOW_FPS_UPS)
+                if (System.currentTimeMillis() - lastCheck >= 1000) {
+
+                    lastCheck = System.currentTimeMillis();
+                    System.out.println("FPS: " + frames + " | UPS: " + updates);
+                    frames = 0;
+                    updates = 0;
+
+                }
+
         }
-
     }
 
     public void windowFocusLost() {
@@ -129,5 +139,25 @@ public class FlappyGame implements Runnable {
 
     public Playing getPlaying() {
         return playing;
+    }
+
+    public Credits getCredits() {
+        return credits;
+    }
+
+    public PlayerSelection getPlayerSelection() {
+        return playerSelection;
+    }
+
+    public GameOptions getGameOptions() {
+        return gameOptions;
+    }
+
+    public AudioOptions getAudioOptions() {
+        return audioOptions;
+    }
+
+    public AudioPlayer getAudioPlayer() {
+        return audioPlayer;
     }
 }

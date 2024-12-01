@@ -11,15 +11,15 @@ import utils.LoadSave;
 
 public class Menu extends State implements Statemethods {
 
-    private MenuButton[] buttons = new MenuButton[3];
-    private BufferedImage backgroundImg, backgroundImgPink;
+    private MenuButton[] buttons = new MenuButton[4];
+    private BufferedImage backgroundImg, backgroundImgFlappyBird;
     private int menuX, menuY, menuWidth, menuHeight;
 
     public Menu(FlappyGame flappyGame) {
         super(flappyGame);
         loadButtons();
         loadBackground();
-        backgroundImgPink = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
+        backgroundImgFlappyBird = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
 
     }
 
@@ -28,14 +28,14 @@ public class Menu extends State implements Statemethods {
         menuWidth = (int) (backgroundImg.getWidth() * FlappyGame.SCALE);
         menuHeight = (int) (backgroundImg.getHeight() * FlappyGame.SCALE);
         menuX = FlappyGame.GAME_WIDTH / 2 - menuWidth / 2;
-        menuY = (int) (45 * FlappyGame.SCALE);
-
+        menuY = (int) (25 * FlappyGame.SCALE);
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (150 * FlappyGame.SCALE), 0, Gamestate.PLAYING);
-        buttons[1] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (220 * FlappyGame.SCALE), 1, Gamestate.OPTIONS);
-        buttons[2] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (290 * FlappyGame.SCALE), 2, Gamestate.QUIT);
+        buttons[0] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (130 * FlappyGame.SCALE), 0, Gamestate.PLAYER_SELECTION);
+        buttons[1] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (200 * FlappyGame.SCALE), 1, Gamestate.OPTIONS);
+        buttons[2] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (270 * FlappyGame.SCALE), 3, Gamestate.CREDITS);
+        buttons[3] = new MenuButton(FlappyGame.GAME_WIDTH / 2, (int) (340 * FlappyGame.SCALE), 2, Gamestate.QUIT);
     }
 
     @Override
@@ -46,18 +46,11 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-
-        g.drawImage(backgroundImgPink, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
+        g.drawImage(backgroundImgFlappyBird, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
         for (MenuButton mb : buttons)
             mb.draw(g);
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -67,7 +60,6 @@ public class Menu extends State implements Statemethods {
                 mb.setMousePressed(true);
             }
         }
-
     }
 
     @Override
@@ -76,12 +68,12 @@ public class Menu extends State implements Statemethods {
             if (isIn(e, mb)) {
                 if (mb.isMousePressed())
                     mb.applyGamestate();
+                if (mb.getState() == Gamestate.PLAYING)
+                    flappyGame.getAudioPlayer().setLevelSong(flappyGame.getPlaying().getLevelManager().getLevelIndex());
                 break;
             }
         }
-
         resetButtons();
-
     }
 
     private void resetButtons() {
@@ -105,8 +97,11 @@ public class Menu extends State implements Statemethods {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER)
-            Gamestate.state = Gamestate.PLAYING;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        // TODO Auto-generated method stub
 
     }
 

@@ -1,149 +1,195 @@
 package utils;
 
 import java.awt.geom.Rectangle2D;
-import java.util.Arrays;
 
 import main.FlappyGame;
+import objects.Projectile;
 
 public class HelpMethods {
 
-    boolean birdScored = false;
-    private static int birdScore = 0;
-    private static int previousValue = 0;
-    private static boolean birdEntered = false;
-    private static boolean birdExited = true;
+	public static boolean CanMoveHere(float x, float y, float width, float height, int[][] lvlData) {
+		if (!IsSolid(x, y, lvlData))
+			if (!IsSolid(x + width, y + height, lvlData))
+				if (!IsSolid(x + width, y, lvlData))
+					if (!IsSolid(x, y + height, lvlData))
+						return true;
+		return false;
+	}
 
-
-    public static boolean CanMoveHereNew(float x, float y, float width, float height, int[][] lvlData) {
-        if (!IsSolid(x, y, lvlData))
-            if (!IsSolid(x + width, y + height, lvlData))
-                if (!IsSolid(x + width, y, lvlData))
-                    if (!IsSolid(x, y + height, lvlData))
-                        return true;
-        return false;
-    }
-
-    public static boolean CanMoveHere(float x, float y, float width, float height, int[][] lvlData) {
-        if (!IsSolid(x, y, lvlData))
-            if (!IsSolid(x + width, y + height, lvlData))
-                if (!IsSolid(x + width, y, lvlData))
-                    if (!IsSolid(x, y + height, lvlData)) {
-                        return true;
-                    }
-        return false;
-    }
-
-    // Not working.
-    public static void updateBirdScoreOld(float x, float y, int[][] lvlData) {
-        int xIndex = (int) (x / FlappyGame.TILE_SIZE);
-        int yIndex = (int) (y / FlappyGame.TILE_SIZE);
-        int value = lvlData[yIndex][xIndex];
-
-        // Check if bird enters the score tile
-        if (value == 23 && !birdEntered) {
-            birdEntered = true;
-            birdExited = false;
-            System.out.println("Bird entered the scoring zone");
-        }
-        // Check if bird exits the score tile by moving to a non score tile
-        if (birdEntered && !birdExited) {
-            if (xIndex > 0 && xIndex < lvlData[0].length - 1) {
-                int nextValue = lvlData[yIndex][xIndex + 1];
-                int previousValue = lvlData[yIndex][xIndex - 1];
-
-                // If the bird moves from the tile 23 to another tile
-                if (nextValue == 11 || previousValue == 11) {
-                    birdExited = true;
-                    birdEntered = false;
-                    birdScore++;
-                    System.out.println("Bird exited the scoring zone. Current score: " + birdScore);
-                }
-            }
-        }
-    }
-
-    public static boolean IsSolid(float x, float y, int[][] lvlData) {
-        //System.out.println("lvlData[1][1]: " + lvlData[1][1]);
-        //System.out.println("lvlData: " + Arrays.stream(lvlData).allMatch(23));
-
-        int maxWidth = lvlData[0].length * FlappyGame.TILE_SIZE;
-        // if (x < 0 || x >= FlappyGame.GAME_WIDTH)
-        if (x < 0 || x >= maxWidth)
-            return true;
-        if (y < 0 || y >= FlappyGame.GAME_HEIGHT)
-            return true;
-
-        // updateBirdScore2(x, y, lvlData);
-
-        float xIndex = x / FlappyGame.TILE_SIZE;
-        float yIndex = y / FlappyGame.TILE_SIZE;
-        int value = lvlData[(int) yIndex][(int) xIndex];
-
-//        int nextValue = lvlData[(int) yIndex][(int) xIndex + 1];
- //       int previousValue = lvlData[(int) yIndex][(int) xIndex - 1];
-
-//        if ((value == 23) & (nextValue == 11) & (!(birdEntered) & (birdExited)))  {
+//	private static boolean IsSolid(float x, float y, int[][] lvlData) {
+//		int maxWidth = lvlData[0].length * FlappyGame.TILES_SIZE;
+//		if (x < 0 || x >= maxWidth)
+//			return true;
+//		if (y < 0 || y >= FlappyGame.GAME_HEIGHT)
+//			return true;
+//		float xIndex = x / FlappyGame.TILES_SIZE;
+//		float yIndex = y / FlappyGame.TILES_SIZE;
 //
-//            birdEntered = true;
+//		return IsTileSolid((int) xIndex, (int) yIndex, lvlData);
+//	}
+
+	public static boolean IsProjectileHittingLevel(Projectile p, int[][] lvlData) {
+		return IsSolid(p.getHitbox().x + p.getHitbox().width / 2, p.getHitbox().y + p.getHitbox().height / 2, lvlData);
+	}
+
+	public static boolean IsEntityInWater(Rectangle2D.Float hitbox, int[][] lvlData) {
+		// Will only check if entity touch top water. Can't reach bottom water if not
+		// touched top water.
+		if (GetTileValue(hitbox.x, hitbox.y + hitbox.height, lvlData) != 48)
+			if (GetTileValue(hitbox.x + hitbox.width, hitbox.y + hitbox.height, lvlData) != 48)
+				return false;
+		return true;
+	}
+
+	private static int GetTileValue(float xPos, float yPos, int[][] lvlData) {
+		int xCord = (int) (xPos / FlappyGame.TILES_SIZE);
+		int yCord = (int) (yPos / FlappyGame.TILES_SIZE);
+		return lvlData[yCord][xCord];
+	}
+
+//	public static boolean IsTileSolid(int xTile, int yTile, int[][] lvlData) {
+//		int value = lvlData[yTile][xTile];
 //
-//            System.out.println("Bird entered                  <<<<<<<<<<    ");
-//            if ((value == 23 ) & (lvlData[(int) yIndex][(int) xIndex + 1] == 11  )) {
-//                birdExited = true; // If the bird reached the end and next tile is 11 before tile 23.
-//                // birdEntered = false;
-//                System.out.println("Bird is exiting after this ");
-//                // birdScore++;
-//            }
-//        }
+//		switch (value) {
+//		case 11, 23, 48, 49:
+//			return false; // Set it to false for testing .
 //
-//        if ((value == 11) & (birdExited))  {
-//                birdEntered = false;
-//               // System.out.println("Entered second if statement !");
-//        }
+//		default:
+//			return true;
+//		}
+//
+//	}
 
-        if (value == 23) {
-            return false;
-        }
+	public static boolean IsSolid(float x, float y, int[][] lvlData) {
+		//System.out.println("lvlData[1][1]: " + lvlData[1][1]);
+		//System.out.println("lvlData: " + Arrays.stream(lvlData).allMatch(23));
 
-        if (value >= 48 || value < 0 || value != 11) {
-            return true;
-            // return false;
-        }
-        return false;
-    }
+		int maxWidth = lvlData[0].length * FlappyGame.TILES_SIZE;
+		// if (x < 0 || x >= FlappyGame.GAME_WIDTH)
+		if (x < 0 || x >= maxWidth)
+			return true;
+		if (y < 0 || y >= FlappyGame.GAME_HEIGHT)
+			return true;
 
-    public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
-        int currentTile = (int) (hitbox.x / FlappyGame.TILE_SIZE);
-        if (xSpeed > 0) {
-            // Right
-            int tileXPos = currentTile * FlappyGame.TILE_SIZE;
-            int xOffset = (int) (FlappyGame.TILE_SIZE - hitbox.width);
-            return tileXPos + xOffset - 1;
-        } else
-            // Left
-            return currentTile * FlappyGame.TILE_SIZE;
-    }
+		float xIndex = x / FlappyGame.TILES_SIZE;
+		float yIndex = y / FlappyGame.TILES_SIZE;
+		int value = lvlData[(int) yIndex][(int) xIndex];
 
-    public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
-        int currentTile = (int) (hitbox.y / FlappyGame.TILE_SIZE);
-        if (airSpeed > 0) {
-            // Falling - touching floor
-            int tileYPos = currentTile * FlappyGame.TILE_SIZE;
-            int yOffset = (int) (FlappyGame.TILE_SIZE - hitbox.height);
-            return tileYPos + yOffset - 1;
-        } else
-            // Jumping
-            return currentTile * FlappyGame.TILE_SIZE;
+		if (value == 23) {
+			return false;
+		}
 
-    }
+		if (value >= 48 || value < 0 || value != 11) {
+			return true;
+			// return false;
+		}
+		return false;
+	}
 
-    public static boolean IsEntityOnFloor(Rectangle2D.Float hitbox, int[][] lvlData) {
-        // Check the pixel below bottomleft and bottomright
-        if (!IsSolid(hitbox.x, hitbox.y + hitbox.height + 1, lvlData))
-            if (!IsSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, lvlData)) {
-                return false;
-                }
 
-        return true;
+	public static float GetEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
+		int currentTile = (int) (hitbox.x / FlappyGame.TILES_SIZE);
+		if (xSpeed > 0) {
+			// Right
+			int tileXPos = currentTile * FlappyGame.TILES_SIZE;
+			int xOffset = (int) (FlappyGame.TILES_SIZE - hitbox.width);
+			return tileXPos + xOffset - 1;
+		} else
+			// Left
+			return currentTile * FlappyGame.TILES_SIZE;
+	}
 
-    }
+	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float airSpeed) {
+		int currentTile = (int) (hitbox.y / FlappyGame.TILES_SIZE);
+		if (airSpeed > 0) {
+			// Falling - touching floor
+			int tileYPos = currentTile * FlappyGame.TILES_SIZE;
+			int yOffset = (int) (FlappyGame.TILES_SIZE - hitbox.height);
+			return tileYPos + yOffset - 1;
+		} else
+			// Jumping
+			return currentTile * FlappyGame.TILES_SIZE;
+
+	}
+
+	public static boolean IsEntityOnFloor(Rectangle2D.Float hitbox, int[][] lvlData) {
+		if (!IsSolid(hitbox.x, hitbox.y + hitbox.height + 1, lvlData))
+			if (!IsSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, lvlData))
+				return false;
+		return true;
+	}
+
+	public static boolean IsFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+		if (xSpeed > 0)
+			return IsSolid(hitbox.x + hitbox.width + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+		else
+			return IsSolid(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+	}
+
+	public static boolean IsFloor(Rectangle2D.Float hitbox, int[][] lvlData) {
+		if (!IsSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, lvlData))
+			if (!IsSolid(hitbox.x, hitbox.y + hitbox.height + 1, lvlData))
+				return false;
+		return true;
+	}
+
+	public static boolean CanCannonSeePlayer(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
+		int firstXTile = (int) (firstHitbox.x / FlappyGame.TILES_SIZE);
+		int secondXTile = (int) (secondHitbox.x / FlappyGame.TILES_SIZE);
+
+		if (firstXTile > secondXTile)
+			return IsAllTilesClear(secondXTile, firstXTile, yTile, lvlData);
+		else
+			return IsAllTilesClear(firstXTile, secondXTile, yTile, lvlData);
+	}
+
+	public static boolean IsAllTilesClear(int xStart, int xEnd, int y, int[][] lvlData) {
+		for (int i = 0; i < xEnd - xStart; i++)
+			// if (IsTileSolid(xStart + i, y, lvlData))
+			if (IsSolid(xStart + i, y, lvlData))
+				return false;
+		return true;
+	}
+
+	public static boolean IsAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
+		if (IsAllTilesClear(xStart, xEnd, y, lvlData))
+			for (int i = 0; i < xEnd - xStart; i++) {
+				// if (!IsTileSolid(xStart + i, y + 1, lvlData))
+					if (!IsSolid(xStart + i, y + 1, lvlData))
+					return false;
+			}
+		return true;
+	}
+
+	// Player can sometimes be on an edge and in sight of enemy.
+	// The old method would return false because the player x is not on edge.
+	// This method checks both player x and player x + width.
+	// If tile under playerBox.x is not solid, we switch to playerBox.x +
+	// playerBox.width;
+	// One of them will be true, because of prior checks.
+
+	public static boolean IsSightClear(int[][] lvlData, Rectangle2D.Float enemyBox, Rectangle2D.Float playerBox, int yTile) {
+		int firstXTile = (int) (enemyBox.x / FlappyGame.TILES_SIZE);
+
+		int secondXTile;
+		if (IsSolid(playerBox.x, playerBox.y + playerBox.height + 1, lvlData))
+			secondXTile = (int) (playerBox.x / FlappyGame.TILES_SIZE);
+		else
+			secondXTile = (int) ((playerBox.x + playerBox.width) / FlappyGame.TILES_SIZE);
+
+		if (firstXTile > secondXTile)
+			return IsAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
+		else
+			return IsAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
+	}
+
+	public static boolean IsSightClear_OLD(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
+		int firstXTile = (int) (firstHitbox.x / FlappyGame.TILES_SIZE);
+		int secondXTile = (int) (secondHitbox.x / FlappyGame.TILES_SIZE);
+
+		if (firstXTile > secondXTile)
+			return IsAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
+		else
+			return IsAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
+	}
 }
