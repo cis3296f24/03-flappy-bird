@@ -69,13 +69,13 @@ public class PlayerSelection extends State implements Statemethods {
         playButton.draw(g);
 
         //Center
-        drawChar(g, playerIndex, menuX + menuWidth / 2, menuY + menuHeight / 2);
+        drawChar(g, playerIndex, menuX + (menuWidth / 2) + 90, menuY + menuHeight / 2);
 
         //Left
-        drawChar(g, playerIndex - 1, menuX, menuY + menuHeight / 2);
+        //drawChar(g, playerIndex - 1, menuX + 90, menuY + menuHeight / 2);
 
         //Left
-        drawChar(g, playerIndex + 1, menuX + menuWidth, menuY + menuHeight / 2);
+        //drawChar(g, playerIndex + 1, menuX + menuWidth + 90, menuY + menuHeight / 2);
 
     }
 
