@@ -71,11 +71,15 @@ public class PlayerSelection extends State implements Statemethods {
         //Center
         drawChar(g, playerIndex, menuX + (menuWidth / 2) + 90, menuY + menuHeight / 2);
 
-        //Left
-        drawChar(g, playerIndex - 1, menuX  + 90, menuY + menuHeight / 2);
+        g.setColor(Color.white);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("To Choose Press <-  arrows  ->",menuX + (menuWidth / 2) -150, (menuY + menuHeight / 2) + 100);
 
         //Left
-        drawChar(g, playerIndex + 1, menuX + menuWidth  + 90, menuY + menuHeight / 2);
+       // drawChar(g, playerIndex - 1, menuX  + 90, menuY + menuHeight / 2);
+
+        //Left
+       // drawChar(g, playerIndex + 1, menuX + menuWidth  + 90, menuY + menuHeight / 2);
 
     }
 
