@@ -1,9 +1,13 @@
 package main;
 
-public class FlappyMain {
+//jack's comment
+// David was here
+//Eli was here
 
-	public static void main(String[] args) {
-		new FlappyGame();
-	}
-
+// Game starts from this point. - Shafiq
+public class  FlappyMain {
+    public static void main(String[] args) {
+        //System.out.println("Hello World!");
+        new  FlappyGame();
+    }
 }
