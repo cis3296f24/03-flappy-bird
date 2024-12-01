@@ -301,7 +301,7 @@ public class Player extends Entity {
         g.drawImage(animations[playerCharacter.getRowIndex(state)][aniIndex], ((int) (hitbox.x - playerCharacter.xDrawOffset) - lvlOffset + flipX), (int) (hitbox.y - playerCharacter.yDrawOffset + (int) (pushDrawOffset)), width * flipW, height, null);
         drawHitbox(g, lvlOffset); //
         // drawAttackBox(g, lvlOffset); This is for if we need to set an attack area for the bird. Not used.
-        drawUI(g);
+        // drawUI(g);
         updateScore(birdScore, g); // every player re-draw check if scored.
 
     }
@@ -310,7 +310,7 @@ public class Player extends Entity {
     public void updateScore(int score,Graphics g ) {
         g.setColor(Color.white);
         g.setFont(new Font("Arial", Font.BOLD, 30));
-        g.drawString("Score: " + score, 50, 150);
+        g.drawString("Score: " + score, 50, 50);
     }
 
     // Draws the health bar of the bird in the upper left corner.
