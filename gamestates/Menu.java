@@ -20,7 +20,6 @@ public class Menu extends State implements Statemethods {
         loadButtons();
         loadBackground();
         backgroundImgFlappyBird = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
-
     }
 
     private void loadBackground() {
@@ -48,7 +47,6 @@ public class Menu extends State implements Statemethods {
     public void draw(Graphics g) {
         g.drawImage(backgroundImgFlappyBird, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
-
         for (MenuButton mb : buttons)
             mb.draw(g);
     }
@@ -79,20 +77,17 @@ public class Menu extends State implements Statemethods {
     private void resetButtons() {
         for (MenuButton mb : buttons)
             mb.resetBools();
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
         for (MenuButton mb : buttons)
             mb.setMouseOver(false);
-
         for (MenuButton mb : buttons)
             if (isIn(e, mb)) {
                 mb.setMouseOver(true);
                 break;
             }
-
     }
 
     @Override
@@ -100,15 +95,12 @@ public class Menu extends State implements Statemethods {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
-
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
+    public void mouseClicked(MouseEvent e) {
         // TODO Auto-generated method stub
-
     }
-
 }

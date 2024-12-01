@@ -179,7 +179,6 @@ public class ObjectManager {
 						if (isPlayerInFrontOfCannon(c, player))
 							if (CanCannonSeePlayer(lvlData, player.getHitbox(), c.getHitbox(), c.getTileY()))
 								c.setAnimation(true);
-
 			c.update();
 			if (c.getAniIndex() == 4 && c.getAniTick() == 0)
 				shootCannon(c);

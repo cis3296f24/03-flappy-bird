@@ -15,7 +15,7 @@ import static utils.Constants.PlayerConstants.IDLE;
 
 public class PlayerSelection extends State implements Statemethods {
 
-    private BufferedImage backgroundImg, backgroundImgPink;
+    private BufferedImage backgroundImg, menuBackground;
     private int menuX, menuY, menuWidth, menuHeight;
     private MenuButton playButton;
     private int playerIndex = 0;
@@ -25,11 +25,9 @@ public class PlayerSelection extends State implements Statemethods {
 
     public PlayerSelection(FlappyGame flappyGame) {
         super(flappyGame);
-
         loadButtons();
         loadBackground();
-        backgroundImgPink = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
-
+        menuBackground = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND_IMG);
         loadCharAnimations();
     }
 
@@ -65,7 +63,7 @@ public class PlayerSelection extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImgPink, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
+        g.drawImage(menuBackground, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
         g.drawImage(backgroundImg, menuX, menuY, menuWidth, menuHeight, null);
 
         playButton.draw(g);

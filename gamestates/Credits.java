@@ -22,7 +22,7 @@ public class Credits extends State implements Statemethods {
         creditsImg = LoadSave.GetSpriteAtlas(LoadSave.CREDITS);
         bgW = (int) (creditsImg.getWidth() * FlappyGame.SCALE);
         bgH = (int) (creditsImg.getHeight() * FlappyGame.SCALE);
-        bgX = FlappyGame.GAME_WIDTH / 2 - bgW / 2;
+        bgX = (FlappyGame.GAME_WIDTH / 2 - bgW / 2);
         bgY = FlappyGame.GAME_HEIGHT;
         loadEntities();
     }

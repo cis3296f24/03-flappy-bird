@@ -39,32 +39,26 @@ public class Playing extends State implements Statemethods {
     private GameCompletedOverlay gameCompletedOverlay;
     private LevelCompletedOverlay levelCompletedOverlay;
     private Rain rain;
-
     private boolean paused = false;
-
     private int xLvlOffset;
-
     private int leftBorder = (int) (0.2 * FlappyGame.GAME_WIDTH);
     private int rightBorder = (int) ((FlappyGame.GAME_WIDTH) / 2); // This determines the how far the bird travels to the right.
     private int maxLvlOffsetX;
-
-    private BufferedImage backgroundImg, bigCloud, smallCloud, shipImgs[];
+    private BufferedImage backgroundImg;
+    private BufferedImage bigCloud;
+    private BufferedImage smallCloud;
+    private BufferedImage[] shipImgs;
     private BufferedImage[] questionImgs, exclamationImgs;
     private ArrayList<DialogueEffect> dialogEffects = new ArrayList<>();
-
     // Flappy bird
     private BufferedImage flappyBKGLayer1, flappyBKGLayer2, flappyBKGLayer3;
     private int backgroundImgWidth = FlappyGame.GAME_WIDTH;
-
     private float backgroundImgSpeed = .07f;
     private float backLayer1Speed = 0.06f;
     private float backLayer2Speed = 0.08f;
     private int backgroundImgCounter = 0;
-
-
     private int[] smallCloudsPos;
     private Random rnd = new Random();
-
     private boolean gameOver;
     private boolean lvlCompleted;
     private boolean gameCompleted;
@@ -89,21 +83,18 @@ public class Playing extends State implements Statemethods {
     public Playing(FlappyGame flappyGame) {
         super(flappyGame);
         initClasses();
-
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
-
         //        bigCloud = LoadSave.GetSpriteAtlas(LoadSave.BIG_CLOUDS);
-        //        smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
-        //        smallCloudsPos = new int[8];
-        //        for (int i = 0; i < smallCloudsPos.length; i++)
-        //            smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
-
+        smallCloud = LoadSave.GetSpriteAtlas(LoadSave.SMALL_CLOUDS);
+        smallCloudsPos = new int[8];
+        for (int i = 0; i < smallCloudsPos.length; i++) {
+            smallCloudsPos[i] = (int) (90 * FlappyGame.SCALE) + rnd.nextInt((int) (100 * FlappyGame.SCALE));
+        }
         //        shipImgs = new BufferedImage[4];
         //        BufferedImage temp = LoadSave.GetSpriteAtlas(LoadSave.SHIP);
         //        for (int i = 0; i < shipImgs.length; i++)
         //            shipImgs[i] = temp.getSubimage(i * 78, 0, 78, 72);
         // loadDialogue();
-
         calcLvlOffset();
         loadStartLevel();
         setDrawRainBoolean();
@@ -111,17 +102,14 @@ public class Playing extends State implements Statemethods {
 
     private void loadDialogue() {
         loadDialogueImgs();
-
         // Load dialogue array with pre-made objects, that gets activated when needed.
         // This is a simple
         // way of avoiding ConcurrentModificationException error. (Adding to a list that
         // is being looped through.
-
         for (int i = 0; i < 10; i++)
             dialogEffects.add(new DialogueEffect(0, 0, EXCLAMATION));
         for (int i = 0; i < 10; i++)
             dialogEffects.add(new DialogueEffect(0, 0, QUESTION));
-
         for (DialogueEffect de : dialogEffects)
             de.deactive();
     }
@@ -131,7 +119,6 @@ public class Playing extends State implements Statemethods {
         questionImgs = new BufferedImage[5];
         for (int i = 0; i < questionImgs.length; i++)
             questionImgs[i] = qtemp.getSubimage(i * 14, 0, 14, 12);
-
         BufferedImage etemp = LoadSave.GetSpriteAtlas(LoadSave.EXCLAMATION_ATLAS);
         exclamationImgs = new BufferedImage[5];
         for (int i = 0; i < exclamationImgs.length; i++)
@@ -159,13 +146,10 @@ public class Playing extends State implements Statemethods {
         levelManager = new LevelManager(flappyGame);
         enemyManager = new EnemyManager(this);
         objectManager = new ObjectManager(this);
-
-
         pauseOverlay = new PauseOverlay(this);
         gameOverOverlay = new GameOverOverlay(this);
         levelCompletedOverlay = new LevelCompletedOverlay(this);
         gameCompletedOverlay = new GameCompletedOverlay(this);
-
         rain = new Rain();
     }
 
@@ -209,15 +193,12 @@ public class Playing extends State implements Statemethods {
             if (shipAni >= 4)
                 shipAni = 0;
         }
-
         shipHeightDelta += shipHeightChange * shipDir;
         shipHeightDelta = Math.max(Math.min(10 * FlappyGame.SCALE, shipHeightDelta), 0);
-
         if (shipHeightDelta == 0)
             shipDir = 1;
         else if (shipHeightDelta == 10 * FlappyGame.SCALE)
             shipDir = -1;
-
     }
 
 //    private void updateDialogue() {
@@ -248,7 +229,7 @@ public class Playing extends State implements Statemethods {
     }
 
     private void checkCloseToBorder() {
-        System.out.println("xLvlOffset: " + xLvlOffset);
+        // System.out.println("xLvlOffset: " + xLvlOffset);
         int playerX = (int) player.getHitbox().x;
         int diff = playerX - xLvlOffset;
         if (diff > rightBorder) {
@@ -268,9 +249,8 @@ public class Playing extends State implements Statemethods {
     @Override
     public void draw(Graphics g) {
         g.drawImage(backgroundImg, 0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT, null);
-        // drawClouds(g);
+        drawClouds(g);
         setDrawRainBoolean(); // Make it rain 25% of the time.
-
         if (drawRain)
             rain.draw(g, xLvlOffset);
 
@@ -278,16 +258,11 @@ public class Playing extends State implements Statemethods {
         //            g.drawImage(shipImgs[shipAni], (int) (100 * FlappyGame.SCALE) - xLvlOffset, (int) ((288 * FlappyGame.SCALE) + shipHeightDelta), (int) (78 * FlappyGame.SCALE), (int) (72 * FlappyGame.SCALE), null);
 
         levelManager.draw(g, xLvlOffset);
-
         // objectManager.draw(g, xLvlOffset);
         // enemyManager.draw(g, xLvlOffset);
-
         player.render(g, xLvlOffset);
-
         // objectManager.drawBackgroundTrees(g, xLvlOffset);
-
         // drawDialogue(g, xLvlOffset);
-
         if (paused) {
             g.setColor(new Color(0, 0, 0, 150));
             g.fillRect(0, 0, FlappyGame.GAME_WIDTH, FlappyGame.GAME_HEIGHT);
@@ -298,16 +273,14 @@ public class Playing extends State implements Statemethods {
             levelCompletedOverlay.draw(g);
         else if (gameCompleted)
             gameCompletedOverlay.draw(g);
-
     }
 
-    //    private void drawClouds(Graphics g) {
-    //        for (int i = 0; i < 4; i++)
-    //            g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
-    //
-    //        for (int i = 0; i < smallCloudsPos.length; i++)
-    //            g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.7), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
-    //    }
+    private void drawClouds(Graphics g) {
+        //            for (int i = 0; i < 4; i++)
+        //                g.drawImage(bigCloud, i * BIG_CLOUD_WIDTH - (int) (xLvlOffset * 0.3), (int) (204 * FlappyGame.SCALE), BIG_CLOUD_WIDTH, BIG_CLOUD_HEIGHT, null);
+        for (int i = 0; i < smallCloudsPos.length; i++)
+            g.drawImage(smallCloud, SMALL_CLOUD_WIDTH * 4 * i - (int) (xLvlOffset * 0.07), smallCloudsPos[i], SMALL_CLOUD_WIDTH, SMALL_CLOUD_HEIGHT, null);
+    }
 
     public void setGameCompleted() {
         gameCompleted = true;
@@ -323,9 +296,7 @@ public class Playing extends State implements Statemethods {
         lvlCompleted = false;
         playerDying = false;
         drawRain = false;
-
         setDrawRainBoolean();
-
         player.resetAll();
         enemyManager.resetAllEnemies();
         objectManager.resetAllObjects();
@@ -339,7 +310,6 @@ public class Playing extends State implements Statemethods {
             drawRain = true;
         }
         drawRain = false;
-
     }
 
     public void setGameOver(boolean gameOver) {
@@ -365,10 +335,11 @@ public class Playing extends State implements Statemethods {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (!gameOver) {
-            if (e.getButton() == MouseEvent.BUTTON1)
-                player.setAttacking(true);
-            else if (e.getButton() == MouseEvent.BUTTON3)
-                player.powerAttack();
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                // player.setAttacking(true);
+            } else if (e.getButton() == MouseEvent.BUTTON3) {
+             //   player.powerAttack();
+            }
         }
     }
 
@@ -380,7 +351,6 @@ public class Playing extends State implements Statemethods {
                     player.setLeft(false); // avoid bird pausing when A key pressed .
                     break;
                 case KeyEvent.VK_D:
-
                     player.setRight(true);
                     break;
                 case KeyEvent.VK_SPACE:
