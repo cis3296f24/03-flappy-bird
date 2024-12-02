@@ -295,7 +295,7 @@ public class Playing extends State implements Statemethods {
         paused = false;
         lvlCompleted = false;
         playerDying = false;
-        drawRain = false;
+        drawRain = true;
         setDrawRainBoolean();
         player.resetAll();
         enemyManager.resetAllEnemies();
@@ -309,7 +309,7 @@ public class Playing extends State implements Statemethods {
         if (rnd.nextFloat() >= 0.8f) {
             drawRain = true;
         }
-        drawRain = false;
+        drawRain = true;
     }
 
     public void setGameOver(boolean gameOver) {
