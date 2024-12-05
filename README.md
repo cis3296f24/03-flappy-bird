@@ -4,7 +4,7 @@ Flappy Bird is a simple arcade-style game that was created for the mobile phone.
 
 
 # How to run
-you can clone this repository into your IDE 
+you can clone this repository into your Java IDE 
 
 then in the main folder go to flappymain and run the program to start the game
 
